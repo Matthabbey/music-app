@@ -4,21 +4,34 @@ import {app} from '../config/firebase.config'
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setAuth}) => {
 
     const firebaseAuth = getAuth(app)
 
-    const provider = new GoogleAuthProvider()
+     const provider = new GoogleAuthProvider()
+     
 
-    const navigate = useNavigate()
+     const navigate = useNavigate()
     
     const loginWithGoogle = async()=>{
       await signInWithPopup(firebaseAuth, provider).then((userCred) =>{
-        console.log("hi")
+        console.log(userCred)
+        if(userCred)
+        setAuth(true)
+        window.localStorage.setItem("auth", "true")
 
+        firebaseAuth.onAuthStateChanged((userCred)=>{
+          if(userCred){
+            // console.log(userCred)
+            navigate("/", {replace: true})
+          }
+          else {
+            setAuth(false)
+            navigate("/login")
+          }
+        })
       });
     };
-
   return (
     <div className="relative w-screen h-screen">
       <div className="absolute inset-0 bg-darkOverlay flex items-center justify-center p-4">
