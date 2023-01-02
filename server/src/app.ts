@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import authRouter from './routes/auth'
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config()
@@ -11,6 +12,10 @@ const app = express();
 app.get("/", (req, res) => {
   return res.json("hey there now");
 });
+//user authentication routes
+app.use('/api/user', authRouter)
+
+
 mongoose.set("strictQuery", false);
 mongoose.connect(process.env.MONGO_DB as string, );
 mongoose.connection
