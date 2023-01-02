@@ -11,10 +11,10 @@ function App() {
   const [auth, setAuth] = useState(false || window.localStorage.getItem('auth') === "true")
   useEffect(() => {
     firebaseAuth.onAuthStateChanged((userCred) =>{
-      console.log(userCred)
+      // console.log(userCred)
       if(userCred){
         userCred.getIdToken().then((token) => {
-          console.log(token)
+          // console.log(token)
         })
       }else{
         setAuth(false)

@@ -31,7 +31,7 @@ const Login = ({setAuth}: any) => {
           }
         })
       });
-    };
+    }
     useEffect(()=>{
       if(window.localStorage.getItem("auth") === "true"){
         navigate("/", {replace: true})
