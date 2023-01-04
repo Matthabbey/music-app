@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 interface UserInstance {
   name: String;
@@ -10,7 +10,7 @@ interface UserInstance {
   auth_time: String;
 }
 
-const UserSchema = new mongoose.Schema<UserInstance>(
+const UserSchema = new Schema<UserInstance>(
   {
     name: {
       type: String,

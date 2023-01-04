@@ -3,7 +3,9 @@ import cors from "cors";
 import authRouter from './routes/auth'
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import connectMongoDB from './config/index';
 dotenv.config()
+connectMongoDB()
 
 const app = express();
 
@@ -16,12 +18,12 @@ app.get("/", (req, res) => {
 app.use('/api/user', authRouter)
 
 
-mongoose.set("strictQuery", false);
-mongoose.connect(process.env.MONGO_DB as string, );
-mongoose.connection
-  .once("open", () => console.log("Successfully Connected to MongoDB"))
-  .on("error", (error) => {
-    console.log(`ERROR: ${error}`);
-  });
+// mongoose.set("strictQuery", false);
+// mongoose.connect(process.env.MONGO_DB as string);
+// mongoose.connection
+//   .once("open", () => console.log("Successfully Connected to MongoDB"))
+//   .on("error", (error) => {
+//     console.log(`ERROR: ${error}`);
+//   });
 
 app.listen(4000, () => console.log("listening to port 4000"));
