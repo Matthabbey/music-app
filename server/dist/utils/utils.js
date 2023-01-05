@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.newUserData = void 0;
+exports.updateNewUserData = exports.newUserData = void 0;
 const user_1 = require("../models/user");
 const newUserData = (decodeValue, req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newUser = new user_1.userModel({
@@ -19,11 +19,14 @@ const newUserData = (decodeValue, req, res) => __awaiter(void 0, void 0, void 0,
         email_verified: decodeValue.email_verified,
         role: "member",
         user_id: decodeValue.user_id,
-        auth_time: decodeValue.auth_time
+        auth_time: decodeValue.auth_time,
     });
     try {
         const savedUser = yield newUser.save();
-        res.status(200).send({ user: savedUser });
+        res.status(200).send({
+            message: "Successfully created",
+            user: savedUser,
+        });
     }
     catch (error) {
         // console.log("hello world")
@@ -31,3 +34,24 @@ const newUserData = (decodeValue, req, res) => __awaiter(void 0, void 0, void 0,
     }
 });
 exports.newUserData = newUserData;
+const updateNewUserData = (decodeValue, req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const filter = { user_id: decodeValue.user_id };
+    const options = {
+        upsert: true,
+        new: true,
+    };
+    try {
+        const update = yield user_1.userModel.findOneAndUpdate(filter, { auth_time: decodeValue.auth_time }, options);
+        return res.status(200).json({
+            message: "Successfully updated",
+            user: update,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            message: "Internal Server Error",
+            route: "todo/update router",
+        });
+    }
+});
+exports.updateNewUserData = updateNewUserData;

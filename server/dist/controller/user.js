@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.GetUser = void 0;
 const firebase_config_1 = __importDefault(require("../config/firebase.config"));
 const user_1 = require("../models/user");
 const utils_1 = require("../utils/utils");
-const User = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const GetUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (!req.headers.authorization) {
             return res.status(404).json({ message: "resquest Not Found" });
@@ -32,7 +32,8 @@ const User = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 (0, utils_1.newUserData)(decodeValue, req, res);
             }
             else {
-                return res.send("need to update");
+                (0, utils_1.updateNewUserData)(decodeValue, req, res);
+                // return res.send("need to update")
             }
         }
     }
@@ -43,4 +44,4 @@ const User = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
 });
-exports.User = User;
+exports.GetUser = GetUser;

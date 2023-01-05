@@ -1,10 +1,10 @@
 import express, {Request, Response} from "express"
 import admin from "../config/firebase.config"
 import { userModel } from "../models/user"
-import { newUserData } from "../utils/utils"
+import { newUserData, updateNewUserData } from "../utils/utils"
 
 
-export const User = async ( req: Request, res: Response) =>{
+export const GetUser = async ( req: Request, res: Response) =>{
     try {
         if(!req.headers.authorization){
             return res.status(404).json({message: "resquest Not Found"})
@@ -19,7 +19,8 @@ export const User = async ( req: Request, res: Response) =>{
             if(!userExist){
                newUserData(decodeValue, req, res)
             }else{
-                return res.send("need to update")
+                updateNewUserData(decodeValue, req, res)
+                // return res.send("need to update")
             }
         }
 
@@ -30,3 +31,4 @@ export const User = async ( req: Request, res: Response) =>{
     })
     }
 }
+
