@@ -4,6 +4,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { Home, Login } from "./components";
 import { app } from "./config/firebase.config";
 import { AnimatePresence } from "framer-motion";
+import { validateUser } from './api/index';
 
 function App() {
   const firebaseAuth = getAuth(app);
@@ -18,6 +19,9 @@ function App() {
       if (userCred) {
         userCred.getIdToken().then((token) => {
           console.log(token);
+          validateUser(token).then((data)=>{
+            console.log({"message": data})
+          })
         });
       } else {
         setAuth(false);
