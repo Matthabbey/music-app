@@ -14,7 +14,7 @@ function App() {
   );
   useEffect(() => {
     firebaseAuth.onAuthStateChanged((userCred) => {
-      console.log(userCred);
+      // console.log(userCred);
       if (userCred) {
         userCred.getIdToken().then((token) => {
           console.log(token);
