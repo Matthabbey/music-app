@@ -9,7 +9,7 @@ connectMongoDB()
 
 const app = express();
 
-// app.use(cors({origin: true}))
+app.use(cors({origin: true}))
 
 app.get("/", (req, res) => {
   return res.json("hey there now");
