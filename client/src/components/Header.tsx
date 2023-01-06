@@ -11,17 +11,20 @@ import { motion } from "framer-motion";
 
 const Header = () => {
   const [{ user }, dispatch] = useStateValue();
-  const [isMenu, setIsMenu] = useState(false)
+  const [isMenu, setIsMenu] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const logOut = () =>{
-    const firebaseAuth = getAuth(app)
-    firebaseAuth.signOut().then(()=>{
-        window.localStorage.setItem("auth", "false")
-    }).catch((e)=> console.log(e));
-    navigate('/login', {replace: true})
-  }
+  const logOut = () => {
+    const firebaseAuth = getAuth(app);
+    firebaseAuth
+      .signOut()
+      .then(() => {
+        window.localStorage.setItem("auth", "false");
+      })
+      .catch((e) => console.log(e));
+    navigate("/login", { replace: true });
+  };
 
   return (
     <header className="flex items-center w-full p-4 md:py-2 md:px-6">
@@ -74,10 +77,11 @@ const Header = () => {
           </NavLink>
         </li>
       </ul>
-      <div 
-      onMouseEnter={()=> setIsMenu(true)}
-      onMouseLeave={()=> setIsMenu(false)}
-      className="flex items-center ml-auto cursor-pointer gap-2 relative">
+      <div
+        onMouseEnter={() => setIsMenu(true)}
+        onMouseLeave={() => setIsMenu(false)}
+        className="flex items-center ml-auto cursor-pointer gap-2 relative"
+      >
         <img
           src={user?.user.imageUrl}
           alt=""
@@ -95,26 +99,37 @@ const Header = () => {
             </IconContext.Provider>
           </p>
         </div>
-       {isMenu && (
-         <motion.div 
-         initial={{opacity: 0, y:50}}
-         animate={{opacity: 1, y: 0}}
-         exit = {{opacity: 0, y : 50}}
-         className="absolute z-10 top-12 right-0 w-275 gap-2 bg-card shadow-lg rounded-lg backdrop:blur-sm flex flex-col p-3">
-           <NavLink to={"/userProfile"}>
+        {isMenu && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="absolute z-10 top-12 right-0 w-275 gap-2 bg-card shadow-lg rounded-lg backdrop:blur-sm flex flex-col p-3"
+          >
+            <NavLink to={"/userProfile"}>
+              <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
+                Profile
+              </p>
+            </NavLink>
+            <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
+              My Favourite
+            </p>
+            <hr />
+          { user?.user?.role === "admin"  && (
+             <NavLink to={"/dashboard/home"}>
              <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
-               Profile
-             </p>
-           </NavLink>
-           <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
-             My Favourite
-           </p>
-           <hr />
-           <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out" onClick={logOut}>
-             Sign Out
-           </p>
-         </motion.div>
-       )}
+                Dashboard
+              </p>
+             </NavLink>
+          )}
+            <p
+              className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out"
+              onClick={logOut}
+            >
+              Sign Out
+            </p>
+          </motion.div>
+        )}
       </div>
     </header>
   );
