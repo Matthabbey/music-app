@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
-import authRouter from './routes/auth'
-import mongoose from "mongoose";
+import authRouter from './routes/auth';
+import songsRouter from './routes/songs';
+import artistRouter from './routes/artist';
+import albumsRouter from './routes/albums';
 import dotenv from "dotenv";
 import connectMongoDB from './config/index';
 dotenv.config()
@@ -16,6 +18,9 @@ app.get("/", (req, res) => {
 });
 //user authentication routes
 app.use('/api/user', authRouter)
+app.use('api/artist', artistRouter)
+app.use('api/songs', songsRouter)
+app.use('api/albums', albumsRouter)
 
 
 // mongoose.set("strictQuery", false);

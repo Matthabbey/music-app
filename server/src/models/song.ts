@@ -11,7 +11,7 @@ export interface SongInstance {
     language: string
 }
 
-const ArtistSchema = new Schema<SongInstance>({
+const SongSchema = new Schema<SongInstance>({
     name: {
         type: String,
         required: true
@@ -43,4 +43,4 @@ const ArtistSchema = new Schema<SongInstance>({
 {timestamps: true}
 )
 
-export const artistModel = mongoose.model<ArtistInstance>("user", ArtistSchema);
+export const songsModel = mongoose.model<ArtistInstance>("songs", SongSchema);

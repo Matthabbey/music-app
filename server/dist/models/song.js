@@ -23,9 +23,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.artistModel = void 0;
+exports.songsModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-const ArtistSchema = new mongoose_1.Schema({
+const SongSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true
@@ -54,4 +54,4 @@ const ArtistSchema = new mongoose_1.Schema({
         required: true
     }
 }, { timestamps: true });
-exports.artistModel = mongoose_1.default.model("user", ArtistSchema);
+exports.songsModel = mongoose_1.default.model("songs", SongSchema);

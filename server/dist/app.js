@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const auth_1 = __importDefault(require("./routes/auth"));
+const songs_1 = __importDefault(require("./routes/songs"));
+const artist_1 = __importDefault(require("./routes/artist"));
+const albums_1 = __importDefault(require("./routes/albums"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const index_1 = __importDefault(require("./config/index"));
 dotenv_1.default.config();
@@ -17,6 +20,9 @@ app.get("/", (req, res) => {
 });
 //user authentication routes
 app.use('/api/user', auth_1.default);
+app.use('api/artist', artist_1.default);
+app.use('api/songs', songs_1.default);
+app.use('api/albums', albums_1.default);
 // mongoose.set("strictQuery", false);
 // mongoose.connect(process.env.MONGO_DB as string);
 // mongoose.connection
