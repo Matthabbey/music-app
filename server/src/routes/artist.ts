@@ -1,13 +1,18 @@
 import express from "express";
-import { CreateArtists, GetSingleArtist } from "../controller/artistsController";
+import {
+  CreateArtists,
+  DeleteArtist,
+  GetAllArtists,
+  GetSingleArtist,
+  UpdateArtist,
+} from "../controller/artistsController";
 
+const router = express.Router();
 
-const router = express.Router()
-router.get("/artist/:id", GetSingleArtist);
+router.get("/getAll", GetAllArtists);
+router.get("/:id", GetSingleArtist);
 router.post("/create", CreateArtists);
+router.put("/update/:id", UpdateArtist);
+router.delete("/delete/:id", DeleteArtist);
 
-
-
-
-
-export default router
+export default router;

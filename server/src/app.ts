@@ -21,13 +21,13 @@ app.get("/", (req, res) => {
 app.use('/api/user', authRouter)
 
 //artist routes
-app.use('/api/', artistRouter)
+app.use('/api/artist', artistRouter)
 
 //song routes
-app.use('/api/', songsRouter)
+app.use('/api/song', songsRouter)
 
 //album routes
-app.use('/api/', albumsRouter)
+app.use('/api/album', albumsRouter)
 
 
 app.listen(4000, () => console.log("listening to port 4000"));

@@ -22,9 +22,9 @@ app.get("/", (req, res) => {
 //user authentication routes
 app.use('/api/user', auth_1.default);
 //artist routes
-app.use('/api/', artist_1.default);
+app.use('/api/artist', artist_1.default);
 //song routes
-app.use('/api/', songs_1.default);
+app.use('/api/song', songs_1.default);
 //album routes
-app.use('/api/', albums_1.default);
+app.use('/api/album', albums_1.default);
 app.listen(4000, () => console.log("listening to port 4000"));
