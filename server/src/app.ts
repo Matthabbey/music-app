@@ -12,23 +12,22 @@ connectMongoDB()
 const app = express();
 
 app.use(cors({origin: true}))
+app.use(express.json())
 
 app.get("/", (req, res) => {
   return res.json("hey there now");
 });
 //user authentication routes
 app.use('/api/user', authRouter)
-app.use('api/artist', artistRouter)
-app.use('api/songs', songsRouter)
-app.use('api/albums', albumsRouter)
 
+//artist routes
+app.use('/api/', artistRouter)
 
-// mongoose.set("strictQuery", false);
-// mongoose.connect(process.env.MONGO_DB as string);
-// mongoose.connection
-//   .once("open", () => console.log("Successfully Connected to MongoDB"))
-//   .on("error", (error) => {
-//     console.log(`ERROR: ${error}`);
-//   });
+//song routes
+app.use('/api/', songsRouter)
+
+//album routes
+app.use('/api/', albumsRouter)
+
 
 app.listen(4000, () => console.log("listening to port 4000"));

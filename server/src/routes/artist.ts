@@ -1,8 +1,10 @@
 import express from "express";
-import { GetUser } from '../controller/user'
+import { CreateArtists, GetAllArtists } from "../controller/artistsController";
+
 
 const router = express.Router()
-router.get("/", );
+router.get("/artists", GetAllArtists);
+router.post("/create", CreateArtists);
 
 
 

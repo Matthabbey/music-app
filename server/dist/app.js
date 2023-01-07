@@ -15,19 +15,16 @@ dotenv_1.default.config();
 (0, index_1.default)();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({ origin: true }));
+app.use(express_1.default.json());
 app.get("/", (req, res) => {
     return res.json("hey there now");
 });
 //user authentication routes
 app.use('/api/user', auth_1.default);
-app.use('api/artist', artist_1.default);
-app.use('api/songs', songs_1.default);
-app.use('api/albums', albums_1.default);
-// mongoose.set("strictQuery", false);
-// mongoose.connect(process.env.MONGO_DB as string);
-// mongoose.connection
-//   .once("open", () => console.log("Successfully Connected to MongoDB"))
-//   .on("error", (error) => {
-//     console.log(`ERROR: ${error}`);
-//   });
+//artist routes
+app.use('/api/', artist_1.default);
+//song routes
+app.use('/api/', songs_1.default);
+//album routes
+app.use('/api/', albums_1.default);
 app.listen(4000, () => console.log("listening to port 4000"));

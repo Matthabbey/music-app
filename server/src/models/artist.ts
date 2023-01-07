@@ -28,4 +28,4 @@ const ArtistSchema = new Schema<ArtistInstance>({
 {timestamps: true}
 )
 
-export const artistModel = mongoose.model<ArtistInstance>("user", ArtistSchema);
+export const artistModel = mongoose.model<ArtistInstance>("artist", ArtistSchema);

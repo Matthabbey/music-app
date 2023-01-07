@@ -1,8 +1,8 @@
 import express from "express";
-import { GetUser } from '../controller/user'
+import { GetAllAlbum } from "../controller/albumsController";
 
 const router = express.Router()
-router.get("/", );
+router.get("/albums", GetAllAlbum);
 
 
 
