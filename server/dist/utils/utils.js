@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateNewUserData = exports.newUserData = void 0;
-const user_1 = require("../models/user");
+const userModel_1 = require("../models/userModel");
 const newUserData = (decodeValue, req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const newUser = new user_1.userModel({
+    const newUser = new userModel_1.userModel({
         name: decodeValue.name,
         email: decodeValue.email,
         imageUrl: decodeValue.picture,
@@ -41,7 +41,7 @@ const updateNewUserData = (decodeValue, req, res) => __awaiter(void 0, void 0, v
         new: true,
     };
     try {
-        const update = yield user_1.userModel.findOneAndUpdate(filter, { auth_time: decodeValue.auth_time }, options);
+        const update = yield userModel_1.userModel.findOneAndUpdate(filter, { auth_time: decodeValue.auth_time }, options);
         return res.status(200).json({
             message: "Successfully updated",
             user: update,

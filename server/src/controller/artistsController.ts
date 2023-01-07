@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { artistModel } from "../models/artist";
+import { artistModel } from "../models/artistModel";
 
 export const CreateArtists = async (req: Request, res: Response) => {
   const { name, imageURL, twitter, instagram } = req.body;

@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const auth_1 = __importDefault(require("./routes/auth"));
-const songs_1 = __importDefault(require("./routes/songs"));
-const artist_1 = __importDefault(require("./routes/artist"));
-const albums_1 = __importDefault(require("./routes/albums"));
+const authRoute_1 = __importDefault(require("./routes/authRoute"));
+const songsRoute_1 = __importDefault(require("./routes/songsRoute"));
+const artistRoute_1 = __importDefault(require("./routes/artistRoute"));
+const albumsRoute_1 = __importDefault(require("./routes/albumsRoute"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const index_1 = __importDefault(require("./config/index"));
 dotenv_1.default.config();
@@ -20,11 +20,11 @@ app.get("/", (req, res) => {
     return res.json("hey there now");
 });
 //user authentication routes
-app.use('/api/user', auth_1.default);
+app.use('/api/user', authRoute_1.default);
 //artist routes
-app.use('/api/artist', artist_1.default);
+app.use('/api/artist', artistRoute_1.default);
 //song routes
-app.use('/api/song', songs_1.default);
+app.use('/api/song', songsRoute_1.default);
 //album routes
-app.use('/api/album', albums_1.default);
+app.use('/api/album', albumsRoute_1.default);
 app.listen(4000, () => console.log("listening to port 4000"));

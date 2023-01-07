@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteArtist = exports.UpdateArtist = exports.GetAllArtists = exports.GetSingleArtist = exports.CreateArtists = void 0;
-const artist_1 = require("../models/artist");
+const artistModel_1 = require("../models/artistModel");
 const CreateArtists = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, imageURL, twitter, instagram } = req.body;
-    const newArtist = new artist_1.artistModel({
+    const newArtist = new artistModel_1.artistModel({
         name,
         imageURL,
         twitter,
@@ -32,7 +32,7 @@ const CreateArtists = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.CreateArtists = CreateArtists;
 const GetSingleArtist = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const filter = { _id: req.params.id };
-    const data = yield artist_1.artistModel.findById(filter);
+    const data = yield artistModel_1.artistModel.findById(filter);
     if (data) {
         return res.status(200).json({ message: "Data is available", data });
     }
@@ -45,7 +45,7 @@ const GetAllArtists = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             createdAt: 0,
         },
     };
-    const data = yield artist_1.artistModel.find({});
+    const data = yield artistModel_1.artistModel.find({});
     if (data) {
         return res.status(200).json({ message: "Successfully", data });
     }
@@ -60,7 +60,7 @@ const UpdateArtist = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     };
     const { name, imageURL, twitter, instagram } = req.body;
     try {
-        const update = yield artist_1.artistModel.findOneAndUpdate(filter, {
+        const update = yield artistModel_1.artistModel.findOneAndUpdate(filter, {
             name,
             imageURL,
             twitter,
@@ -75,7 +75,7 @@ const UpdateArtist = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.UpdateArtist = UpdateArtist;
 const DeleteArtist = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const filter = { _id: req.params.id };
-    const remove = yield artist_1.artistModel.deleteOne(filter);
+    const remove = yield artistModel_1.artistModel.deleteOne(filter);
     if (remove) {
         return res
             .status(200)

@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { albumModel } from "../models/album";
+import { albumModel } from "../models/albumModel";
 
 export const CreateAlbums = async (req: Request, res: Response) => {
   const { name, imageURL, twitter, instagram } = req.body;

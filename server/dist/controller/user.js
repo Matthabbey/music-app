@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetUser = void 0;
 const firebase_config_1 = __importDefault(require("../config/firebase.config"));
-const user_1 = require("../models/user");
+const userModel_1 = require("../models/userModel");
 const utils_1 = require("../utils/utils");
 const GetUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -27,7 +27,7 @@ const GetUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(505).json({ message: "UnAuthorized" });
         }
         else {
-            const userExist = yield user_1.userModel.findOne({ "user_id": decodeValue.user_id });
+            const userExist = yield userModel_1.userModel.findOne({ "user_id": decodeValue.user_id });
             if (!userExist) {
                 (0, utils_1.newUserData)(decodeValue, req, res);
             }

@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
-import authRouter from './routes/auth';
-import songsRouter from './routes/songs';
-import artistRouter from './routes/artist';
-import albumsRouter from './routes/albums';
+import authRouter from './routes/authRoute';
+import songsRouter from './routes/songsRoute';
+import artistRouter from './routes/artistRoute';
+import albumsRouter from './routes/albumsRoute';
 import dotenv from "dotenv";
 import connectMongoDB from './config/index';
 dotenv.config()

@@ -10,10 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteAlbum = exports.UpdateAlbum = exports.GetAllAlbums = exports.GetSingleAlbum = exports.CreateAlbums = void 0;
-const album_1 = require("../models/album");
+const albumModel_1 = require("../models/albumModel");
 const CreateAlbums = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, imageURL, twitter, instagram } = req.body;
-    const newArtist = new album_1.albumModel({
+    const newArtist = new albumModel_1.albumModel({
         name,
         imageURL
     });
@@ -30,7 +30,7 @@ const CreateAlbums = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.CreateAlbums = CreateAlbums;
 const GetSingleAlbum = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const filter = { _id: req.params.id };
-    const data = yield album_1.albumModel.findById(filter);
+    const data = yield albumModel_1.albumModel.findById(filter);
     if (data) {
         return res.status(200).json({ message: "Data is available", data });
     }
@@ -43,7 +43,7 @@ const GetAllAlbums = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             createdAt: 0,
         },
     };
-    const data = yield album_1.albumModel.find({});
+    const data = yield albumModel_1.albumModel.find({});
     if (data) {
         return res.status(200).json({ message: "Successfully", data });
     }
@@ -58,7 +58,7 @@ const UpdateAlbum = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     };
     const { name, imageURL, twitter, instagram } = req.body;
     try {
-        const update = yield album_1.albumModel.findOneAndUpdate(filter, {
+        const update = yield albumModel_1.albumModel.findOneAndUpdate(filter, {
             name,
             imageURL
         }, options);
@@ -71,7 +71,7 @@ const UpdateAlbum = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.UpdateAlbum = UpdateAlbum;
 const DeleteAlbum = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const filter = { _id: req.params.id };
-    const remove = yield album_1.albumModel.deleteOne(filter);
+    const remove = yield albumModel_1.albumModel.deleteOne(filter);
     if (remove) {
         return res
             .status(200)

@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { ArtistInstance } from "./artist";
+import { ArtistInstance } from "./artistModel";
 
 export interface SongInstance {
     name: string,
