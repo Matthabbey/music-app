@@ -6,6 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const artistsController_1 = require("../controller/artistsController");
 const router = express_1.default.Router();
-router.get("/artists", artistsController_1.GetAllArtists);
+router.get("/artist/:id", artistsController_1.GetSingleArtist);
 router.post("/create", artistsController_1.CreateArtists);
 exports.default = router;

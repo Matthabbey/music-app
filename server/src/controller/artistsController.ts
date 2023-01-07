@@ -20,7 +20,7 @@ export const CreateArtists = async (req: Request, res: Response) => {
 };
 
 
-export const GetAllArtists = async (req: Request, res: Response) =>{
+export const GetSingleArtist = async (req: Request, res: Response) =>{
     
     return res.status(200).json({ message: "All artist available in the database"});
 

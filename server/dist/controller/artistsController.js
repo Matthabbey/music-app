@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetAllArtists = exports.CreateArtists = void 0;
+exports.GetSingleArtist = exports.CreateArtists = void 0;
 const artist_1 = require("../models/artist");
 const CreateArtists = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, imageURL, twitter, instagram } = req.body;
@@ -30,7 +30,7 @@ const CreateArtists = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.CreateArtists = CreateArtists;
-const GetAllArtists = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const GetSingleArtist = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(200).json({ message: "All artist available in the database" });
 });
-exports.GetAllArtists = GetAllArtists;
+exports.GetSingleArtist = GetSingleArtist;

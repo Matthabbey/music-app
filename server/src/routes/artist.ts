@@ -1,9 +1,9 @@
 import express from "express";
-import { CreateArtists, GetAllArtists } from "../controller/artistsController";
+import { CreateArtists, GetSingleArtist } from "../controller/artistsController";
 
 
 const router = express.Router()
-router.get("/artists", GetAllArtists);
+router.get("/artist/:id", GetSingleArtist);
 router.post("/create", CreateArtists);
 
 
