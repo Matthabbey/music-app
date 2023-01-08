@@ -4,7 +4,7 @@ const baseURL = "http://localhost:4000/"
 
 export const validateUser = async (token: string) =>{
     try {
-        const result = await axios.get(`${baseURL}api/user/`, {
+        const result = await axios.get(`${baseURL}api/user/login`, {
             headers : {
                 Authorization: "Bearer " + token
             },
@@ -18,7 +18,8 @@ export const validateUser = async (token: string) =>{
 export const getAllUSers = async () =>{
     try {
         const result = await axios.get(`${baseURL}api/user/`)
+        return result.data
     } catch (error) {
-        
+        return null
     }
 }

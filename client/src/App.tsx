@@ -12,7 +12,7 @@ function App() {
   const firebaseAuth = getAuth(app);
   const navigate = useNavigate();
 
-  const [{user}, dispatch] = useStateValue()
+  const [{user}, dispatch]: any = useStateValue()
   const [authState, setAuthState] = useState(false);
   const [auth, setAuth] = useState(
     false || window.localStorage.getItem("auth") === "true"
