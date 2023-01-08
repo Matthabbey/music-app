@@ -17,7 +17,7 @@ const Login = ({setAuth}: any) => {
 
      const navigate = useNavigate()
 
-     const [{user}, dispatch] = useStateValue()
+     const [{user}, dispatch]: {} | any = useStateValue()
     
     const loginWithGoogle = async()=>{
       await signInWithPopup(firebaseAuth, provider).then((userCred) =>{

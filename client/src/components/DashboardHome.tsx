@@ -13,7 +13,7 @@ export const DashboardCard = ({ icon, name, count }: any) => {
 };
 
 const DashboardHome = () => {
-  const [{ allUsers, allSongs, allAlbums, allArtists}, dispatch] = useStateValue()
+  const [{ allUsers, allSongs, allAlbums, allArtists}, dispatch]: any = useStateValue()
 
   useEffect(()=>{
     if(!allUsers){
