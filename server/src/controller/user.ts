@@ -4,7 +4,7 @@ import { userModel } from "../models/userModel"
 import { newUserData, updateNewUserData } from "../utils/utils"
 
 
-export const GetUser = async ( req: Request, res: Response) =>{
+export const LoginUser = async ( req: Request, res: Response) =>{
     try {
         if(!req.headers.authorization){
             return res.status(404).json({message: "resquest Not Found"})
