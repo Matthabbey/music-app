@@ -19,7 +19,7 @@ const utils_1 = require("../utils/utils");
 const LoginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (!req.headers.authorization) {
-            return res.status(404).json({ message: "resquest Not Found" });
+            return res.status(404).json({ message: "resquest Not  Here Found" });
         }
         const token = req.headers.authorization.split(" ")[1];
         const decodeValue = yield firebase_config_1.default.auth().verifyIdToken(token);

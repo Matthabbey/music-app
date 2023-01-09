@@ -7,7 +7,7 @@ import { newUserData, updateNewUserData } from "../utils/utils"
 export const LoginUser = async ( req: Request, res: Response) =>{
     try {
         if(!req.headers.authorization){
-            return res.status(404).json({message: "resquest Not Found"})
+            return res.status(404).json({message: "resquest Not  Here Found"})
         }
         const token = req.headers.authorization.split(" ")[1]
         const decodeValue = await admin.auth().verifyIdToken(token)
