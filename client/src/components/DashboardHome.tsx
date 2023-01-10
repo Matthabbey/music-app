@@ -5,11 +5,15 @@ import { useStateValue } from '../context/StateProvider';
 import { bgColors } from "../utils/styles";
 import DashboardUsers from "./DashboardUsers";
 import { getAllArtists, getAllAlbums } from '../api/index';
+import { FaUsers } from 'react-icons/fa'
+import { GiLoveSong, GiMusicalNotes} from 'react-icons/gi'
+import { RiUserStarFill } from 'react-icons/ri'
+
 
 export const DashboardCard = ({ icon, name, count }: any) => {
-  const bg_color = bgColors[Number(Math.random() * bgColors.length)]
+  const bg_color = bgColors[Math.floor(Math.random() * bgColors.length)]
   return (
-    <div style={{background: `${bg_color}`}} className="p-4 w-40 gap-3 h-auto rounded-lg shadow-md bg-blue-400">
+    <div style={{background: `${bg_color}`}} className={`p-4 w-40 gap-3 h-auto rounded-lg shadow-md flex flex-col items-center justify-center`}>
       {icon}
       <p className="text-xl text-textColor font-semibold"> { name }</p>
       <p className="text-xl text-textColor"> { count }</p>
@@ -56,7 +60,10 @@ const DashboardHome = () => {
   }, [])
   return (
     <div className="w-full p-6 flex items-center justify-evenly flex-wrap">
-     <DashboardUsers />
+     <DashboardCard icon={<FaUsers className="text-3xl text-textColor" />} name={"Users"} count={allUsers?.length > 0 ? allUsers?.length : 0} />
+     <DashboardCard icon={<GiLoveSong className="text-3xl text-textColor" />} name={"Songs"} count={allUsers?.length  > 0 ? allUsers?.length : 0} />
+     <DashboardCard icon={<RiUserStarFill className="text-3xl text-textColor" />} name={"Artists"} count={allUsers?.length  > 0 ? allUsers?.length : 0} />
+     <DashboardCard icon={<GiMusicalNotes className="text-3xl text-textColor" />} name={"Albums"} count={allUsers?.length  > 0 ? allUsers?.length : 0} />
     </div>
   );
 };

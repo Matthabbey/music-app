@@ -41,7 +41,7 @@ const DashboardUsers = () => {
         {
           allUsers && (
             allUsers.map((data: string, i: string)=>{
-              <DashboardUserCard  data={data} index={i}/>
+              // <DashboardUserCard  data={data} index={i}/>
             })
           )
         }
