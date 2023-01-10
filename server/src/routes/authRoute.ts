@@ -1,8 +1,10 @@
 import express from "express";
-import { LoginUser } from '../controller/user'
+import { getAllUSers, LoginUser, UpdateUser } from '../controller/user'
 
 const router = express.Router()
-router.get("/login", LoginUser);
+router.get("/", LoginUser);
+router.put("/favourites/:userId", UpdateUser)
+router.get("/getUsers", getAllUSers)
 
 
 

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoginUser = void 0;
+exports.getAllUSers = exports.UpdateUser = exports.LoginUser = void 0;
 const firebase_config_1 = __importDefault(require("../config/firebase.config"));
 const userModel_1 = require("../models/userModel");
 const utils_1 = require("../utils/utils");
@@ -45,3 +45,34 @@ const LoginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.LoginUser = LoginUser;
+const UpdateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const filter = { _id: req.params.userId };
+    const songId = req.query;
+    try {
+        console.log(filter, songId);
+        const result = yield userModel_1.userModel.updateOne(filter, {
+            $push: { favourites: songId },
+        });
+        res.status(200).send({ success: true, msg: "Song added to favourites" });
+    }
+    catch (error) {
+        res.status(400).send({ success: false, msg: error });
+    }
+});
+exports.UpdateUser = UpdateUser;
+const getAllUSers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const options = {
+        // sort returned documents in ascending order
+        sort: { createdAt: 1 },
+        // Include only the following
+        // projection : {}
+    };
+    const cursor = yield userModel_1.userModel.find(options);
+    if (cursor) {
+        res.status(200).send({ success: true, data: cursor });
+    }
+    else {
+        res.status(200).send({ success: true, msg: "No Data Found" });
+    }
+});
+exports.getAllUSers = getAllUSers;

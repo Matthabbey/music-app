@@ -32,3 +32,35 @@ export const LoginUser = async ( req: Request, res: Response) =>{
     }
 }
 
+export const UpdateUser = async (req: Request, res: Response) => {
+    const filter = { _id: req.params.userId };
+    const songId = req.query;
+  
+    try {
+      console.log(filter, songId);
+      const result = await userModel.updateOne(filter, {
+        $push: { favourites: songId },
+      });
+      res.status(200).send({ success: true, msg: "Song added to favourites" });
+    } catch (error) {
+      res.status(400).send({ success: false, msg: error });
+    }
+  };
+
+  export const getAllUSers =  async (req: Request, res: Response) => {
+    const options = {
+      // sort returned documents in ascending order
+      sort: { createdAt: 1 },
+      // Include only the following
+      // projection : {}
+    };
+  
+    const cursor = await userModel.find(options);
+    if (cursor) {
+      res.status(200).send({ success: true, data: cursor });
+    } else {
+      res.status(200).send({ success: true, msg: "No Data Found" });
+    }
+  };
+
+
