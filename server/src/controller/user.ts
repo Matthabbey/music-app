@@ -55,7 +55,7 @@ export const UpdateUser = async (req: Request, res: Response) => {
       // projection : {}
     };
   
-    const cursor = await userModel.find(options);
+    const cursor = await userModel.find();
     if (cursor) {
       res.status(200).send({ success: true, data: cursor });
     } else {

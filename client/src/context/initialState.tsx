@@ -1,5 +1,5 @@
 export const initialState = {
-    user: null,
+    users: null,
     allUsers: null,
     allSongs: null,
     allArtists: null,

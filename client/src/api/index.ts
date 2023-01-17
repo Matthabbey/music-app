@@ -18,9 +18,10 @@ export const validateUser = async (token: string) =>{
 export const getAllUSers = async () =>{
     try {
         const result = await axios.get(`${baseURL}api/user/getUsers`)
+        console.log(result)
         return result.data
     } catch (error) {
-        return null
+        console.log(error)
     }
 }
 

@@ -67,7 +67,7 @@ const getAllUSers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         // Include only the following
         // projection : {}
     };
-    const cursor = yield userModel_1.userModel.find(options);
+    const cursor = yield userModel_1.userModel.find();
     if (cursor) {
         res.status(200).send({ success: true, data: cursor });
     }

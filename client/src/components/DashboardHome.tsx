@@ -60,7 +60,7 @@ const DashboardHome = () => {
   }, [])
   return (
     <div className="w-full p-6 flex items-center justify-evenly flex-wrap">
-     <DashboardCard icon={<FaUsers className="text-3xl text-textColor" />} name={"Users"} count={allUsers?.length > 0 ? allUsers?.length : 0} />
+     <DashboardCard icon={<FaUsers className="text-3xl text-textColor" />} name={"Users"} count={allUsers.length > 0 ? allUsers.length : 0} />
      <DashboardCard icon={<GiLoveSong className="text-3xl text-textColor" />} name={"Songs"} count={allUsers?.length  > 0 ? allUsers?.length : 0} />
      <DashboardCard icon={<RiUserStarFill className="text-3xl text-textColor" />} name={"Artists"} count={allUsers?.length  > 0 ? allUsers?.length : 0} />
      <DashboardCard icon={<GiMusicalNotes className="text-3xl text-textColor" />} name={"Albums"} count={allUsers?.length  > 0 ? allUsers?.length : 0} />
