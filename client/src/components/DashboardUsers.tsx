@@ -7,14 +7,12 @@ export const DashboardUserCard = ({data, index}: any)=>{
   console.log(data, index);
   
   return (
-
-    <div> Hi </div>
     
-      // <motion.div className="relative w-full rounded-md flex items-center justify-between-py-4 bg-lightOverlay cursor-pointer hover:bg-card hover:shadow-md">
-      //   <div className="w-275 flex item-center justify-center min-w-[160px]">
-      //     <img src={data} referrerPolicy="no-referrer" alt="" className="w-10 h-10 object-cover rounded-md min-w-[40px] shadow-md"/>
-      //   </div>
-      // </motion.div>
+      <motion.div className="relative w-full rounded-md flex items-center justify-between-py-4 bg-lightOverlay cursor-pointer hover:bg-card hover:shadow-md">
+        <div className="w-275 flex item-center justify-center min-w-[160px]">
+          <img src={data.imageUrl} referrerPolicy="no-referrer" alt="" className="w-10 h-10 object-cover rounded-md min-w-[40px] shadow-md"/>
+        </div>
+      </motion.div>
   )
 }
 const DashboardUsers = () => {
@@ -27,7 +25,7 @@ const DashboardUsers = () => {
             Count:{
             <span className="text-xl fontbold text-textColor">
               {getAllUSers?.length}
-            </span>}
+            </span>}\
           </p>
         </div>
 
