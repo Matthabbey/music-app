@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { getAllUSers } from "../api";
 import { useStateValue } from "../context/StateProvider";
 import { motion } from 'framer-motion'
+import moment from "moment";
 
 export const DashboardUserCard = ({data, index}: any)=>{
-  // console.log(user, index);
+  const [{ user }, dispatch]: any | {} = useStateValue();
+  const [updateRole, setUpdateRole] = useState(false)
+  const createdAt = moment(new Date(data.createdAt)).format("MMMM Do YYYY");
   
   return (
     
@@ -16,8 +19,27 @@ export const DashboardUserCard = ({data, index}: any)=>{
         <p className="text-base text-textColor text-center w-275 min-w-[160px]">{data.name}</p>
         <p className="text-base text-textColor text-center w-275 min-w-[160px]">{data.email}</p>
         <p className="text-base text-textColor text-center w-275 min-w-[160px]">{data.email_verified ? "True" : "False"}</p>
-        <p className="text-base text-textColor text-center w-275 min-w-[160px]">{data.createdAt}</p>
+        <p className="text-base text-textColor text-center w-275 min-w-[160px]">{createdAt}</p>
+
+        <div className="w-275 min-w-[160px] text-center flex items-center justify-center gap-6 relative">
         <p className="text-base text-textColor text-center w-275 min-w-[160px]">{data.role}</p>
+
+        {
+          data._id !== user?.user._id && (
+            <motion.p whileTap={{scale: 0.75}} className="text-[10px] font-semibold text-textColor px-1 bg-purple-200 rounded-sm hover:shadow-md">{data.role === "admin" ? "Member" : "Admin"}</motion.p>
+ 
+          )
+        }
+        {
+          updateRole && (
+            <motion.div className="absolute z-10 top-6 right-6 p-4 flex items-start flex-col gap-4 bg-white shadow-xl rounded-md">
+            <p className="text-textColor text-sm font-semibold">Are you sure, you want to mark user as <span> {data.role === "admin" ? "Member" : "Admin "}</span> ?</p>
+  
+          </motion.div>
+          )
+        }
+       
+        </div>
 
       </motion.div>
 
@@ -31,7 +53,7 @@ const DashboardUsers = () => {
       <div className="relative w-full py-12 min-h-[400px] overflow-x-scroll scrollbar-thin scrollbar-track-slate-300 scrollbar-thumb-slate-400 my-4 flex flex-col items-center justify-start p-4 border border-gray-300 rounded-md gap-3">
         <div className="absolute top-4 left-4">
           <p className="text-sm font-semibold">
-            Count:{}
+            Count:{` `}
             <span className="text-xl fontbold text-textColor">
               {allUsers?.length}
             </span>
@@ -62,7 +84,7 @@ const DashboardUsers = () => {
         {
           allUsers && (
             allUsers.map((data: string, i: string)=>(
-              <DashboardUserCard data={data} index={i} />
+              <DashboardUserCard key={i} data={data} index={i} />
             ))
           )
         }
