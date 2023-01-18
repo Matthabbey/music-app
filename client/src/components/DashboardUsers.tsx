@@ -7,11 +7,14 @@ export const DashboardUserCard = ({data, index}: any)=>{
   console.log(data, index);
   
   return (
-      <motion.div className="relative w-full rounded-md flex items-center justify-between-py-4 bg-lightOverlay cursor-pointer hover:bg-card hover:shadow-md">
-        <div className="w-275 flex item-center justify-center min-w-[160px]">
-          <img src={data.imageUrl} alt="" className="w-10 h-10 object-cover rounded-md min-w-[40px] shadow-md"/>
-        </div>
-      </motion.div>
+
+    <div> Hi </div>
+    
+      // <motion.div className="relative w-full rounded-md flex items-center justify-between-py-4 bg-lightOverlay cursor-pointer hover:bg-card hover:shadow-md">
+      //   <div className="w-275 flex item-center justify-center min-w-[160px]">
+      //     <img src={data} referrerPolicy="no-referrer" alt="" className="w-10 h-10 object-cover rounded-md min-w-[40px] shadow-md"/>
+      //   </div>
+      // </motion.div>
   )
 }
 const DashboardUsers = () => {
@@ -21,10 +24,10 @@ const DashboardUsers = () => {
       <div className="relative w-full py-12 min-h-[400px] overflow-x-scroll scrollbar-thin scrollbar-track-slate-300 scrollbar-thumb-slate-400 my-4 flex flex-col items-center justify-start p-4 border border-gray-300 rounded-md gap-3">
         <div className="absolute top-4 left-4">
           <p className="text-sm font-semibold">
-            Count:{}
+            Count:{
             <span className="text-xl fontbold text-textColor">
               {getAllUSers?.length}
-            </span>
+            </span>}
           </p>
         </div>
 

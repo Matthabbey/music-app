@@ -13,7 +13,7 @@ const reducer = (state: any, action: any)=>{
         case actionType.SET_USER:
         return {
             ...state,
-            users: action.users
+            user: action.user
         };
         case actionType.SET_ALL_ALBUMS:
         return {
@@ -23,7 +23,7 @@ const reducer = (state: any, action: any)=>{
         case actionType.SET_ALL_ARTISTS:
         return {
             ...state,
-            allArtist: action.allArtists
+            allArtists: action.allArtists
         };
         case actionType.SET_ALL_SONGS:
         return {
