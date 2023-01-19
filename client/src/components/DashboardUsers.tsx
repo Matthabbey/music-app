@@ -50,8 +50,12 @@ export const DashboardUserCard = ({ data, index }: any) => {
           </motion.p>
         )}
         {updateRole && (
-          <motion.div className="absolute z-10 top-6 right-6 p-4 flex items-start flex-col gap-4 bg-white shadow-xl rounded-md">
-            <p className="text-textColor text-sm font-semibold">
+          <motion.div 
+          initial={{opacity: 0, scale: 0.5}}
+          animate={{opacity: 1, scale: 1}}
+          exit={{opacity: 0, scale: 0.5}}
+          className="absolute z-10 top-6 right-6 p-4 flex items-start flex-col gap-4 bg-white shadow-xl rounded-md">
+            <p className="text-textColor text-[12px] font-semibold">
               Are you sure, you want to mark user as{" "}
               <span> {data.role === "admin" ? "Member" : "Admin "}</span> ?
             </p>
@@ -60,7 +64,7 @@ export const DashboardUserCard = ({ data, index }: any) => {
                     Yes
             </motion.button>
 
-            <motion.button whileTap={{scale: 0.75}} className="outline-none border-none text-sm px-4 py1 rounded-md text-white bg-red-500 hover:shadow-md ">
+            <motion.button whileTap={{scale: 0.75}} className="outline-none border-none text-sm px-4 py1 rounded-md text-white bg-red-500 hover:shadow-md" onClick={()=>setUpdateRole(false)}>
                     No
             </motion.button>
             </div>
