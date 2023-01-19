@@ -29,5 +29,7 @@ app.use('/api/song', songsRouter)
 //album routes
 app.use('/api/album', albumsRouter)
 
+//update routes
+
 
 app.listen(4000, () => console.log("listening to port 4000"));

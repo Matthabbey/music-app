@@ -1,21 +1,32 @@
 import React, { useState } from "react";
-import { getAllUSers } from "../api";
+import { changingUserRole, getAllUSers } from "../api";
 import { useStateValue } from "../context/StateProvider";
 import { motion } from "framer-motion";
 import moment from "moment";
+import { actionType } from "../context/reducer";
 
-interface UpdateUserRole{
-  userId: string | any
-  role: string | any
-}
+// interface UpdateUserRole{
+//   userId: string | any
+//   role: string | any
+// }
 
 export const DashboardUserCard = ({ data, index }: any) => {
   const [{ user }, dispatch]: any | {} = useStateValue();
   const [updateRole, setUpdateRole] = useState<boolean>(false);
   const createdAt = moment(new Date(data.createdAt)).format("MMMM Do YYYY");
+
   const handleUpdateUserRole = (userId: string, role: string)=>{
-      console.log(userId, role);
-      
+    changingUserRole(userId, role).then((res)=>{
+        console.log(res);
+        if(res){
+          getAllUSers().then((data)=>{
+            dispatch({
+              type: actionType.SET_ALL_USERS,
+              allUsers: data.data
+            })
+          })
+        }
+      })
   }
 
   return (

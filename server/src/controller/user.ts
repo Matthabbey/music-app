@@ -36,7 +36,7 @@ export const UpdateUser = async (req: Request, res: Response) => {
   const songId = req.query;
 
   try {
-    console.log(filter, songId);
+    // console.log(filter, songId);
     const result = await userModel.updateOne(filter, {
       $push: { favourites: songId },
     });
@@ -62,20 +62,16 @@ export const getAllUSers = async (req: Request, res: Response) => {
   }
 };
 
-export const updateRole = async (req: Request, res: Response) => {
+export const updateUserRole = async (req: Request, res: Response) => {
   const filter = { _id: req.params.userId };
   const role = req.body.data.role;
-
-  const options = {
-    upsert: true,
-    new: true,
-  };
   try {
     const result = await userModel.findOneAndUpdate(
       filter,
-      { role: role },
-      options
+      { role: role }
     );
+    console.log(result);
+    
     return res.status(200).send({ user: result });
   } catch (error) {
     res.status(400).send({ success: false, msg: error });
