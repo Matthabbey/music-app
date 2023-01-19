@@ -58,7 +58,7 @@ export const getAllUSers = async (req: Request, res: Response) => {
   if (cursor) {
     res.status(200).send({ success: true, data: cursor });
   } else {
-    res.status(200).send({ success: true, msg: "No Data Found" });
+    res.status(400).send({ success: false, msg: "No Data Found" });
   }
 };
 
@@ -71,14 +71,14 @@ export const updateRole = async (req: Request, res: Response) => {
     new: true,
   };
   try {
-    const result = await userModel.findByIdAndUpdate(
+    const result = await userModel.findOneAndUpdate(
       filter,
       { role: role },
       options
     );
     return res.status(200).send({ user: result });
   } catch (error) {
-    res.status(200).send({ success: true, msg: error });
+    res.status(400).send({ success: false, msg: error });
     console.log(error);
   }
 };

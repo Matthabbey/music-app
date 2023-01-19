@@ -4,10 +4,19 @@ import { useStateValue } from "../context/StateProvider";
 import { motion } from "framer-motion";
 import moment from "moment";
 
+interface UpdateUserRole{
+  userId: string | any
+  role: string | any
+}
+
 export const DashboardUserCard = ({ data, index }: any) => {
   const [{ user }, dispatch]: any | {} = useStateValue();
-  const [updateRole, setUpdateRole] = useState(false);
+  const [updateRole, setUpdateRole] = useState<boolean>(false);
   const createdAt = moment(new Date(data.createdAt)).format("MMMM Do YYYY");
+  const handleUpdateUserRole = (userId: string, role: string)=>{
+      console.log(userId, role);
+      
+  }
 
   return (
     <motion.div
@@ -45,28 +54,38 @@ export const DashboardUserCard = ({ data, index }: any) => {
           <motion.p
             whileTap={{ scale: 0.75 }}
             className="text-[10px] font-semibold text-textColor px-1 bg-purple-200 rounded-sm hover:shadow-md"
-          onClick={()=> setUpdateRole(true)}>
+            onClick={() => setUpdateRole(true)}
+          >
             {data.role === "admin" ? "Member" : "Admin"}
           </motion.p>
         )}
         {updateRole && (
-          <motion.div 
-          initial={{opacity: 0, scale: 0.5}}
-          animate={{opacity: 1, scale: 1}}
-          exit={{opacity: 0, scale: 0.5}}
-          className="absolute z-10 top-6 right-6 p-4 flex items-start flex-col gap-4 bg-white shadow-xl rounded-md">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            className="absolute z-10 top-6 right-6 p-4 flex items-start flex-col gap-4 bg-white shadow-xl rounded-md"
+          >
             <p className="text-textColor text-[12px] font-semibold">
               Are you sure, you want to mark user as{" "}
               <span> {data.role === "admin" ? "Member" : "Admin "}</span> ?
             </p>
             <div className="flex items-center gap-4">
-            <motion.button whileTap={{scale: 0.75}} className="outline-none border-none text-sm px-4 py1 rounded-md text-white bg-blue-500 hover:shadow-md ">
-                    Yes
-            </motion.button>
+              <motion.button
+                whileTap={{ scale: 0.75 }}
+                className="outline-none border-none text-sm px-4 py1 rounded-md text-white bg-blue-500 hover:shadow-md "
+                onClick={()=>handleUpdateUserRole(data._id, data.role === 'admin' ? "Member" : "Admin")}
+              >
+                Yes
+              </motion.button>
 
-            <motion.button whileTap={{scale: 0.75}} className="outline-none border-none text-sm px-4 py1 rounded-md text-white bg-red-500 hover:shadow-md" onClick={()=>setUpdateRole(false)}>
-                    No
-            </motion.button>
+              <motion.button
+                whileTap={{ scale: 0.75 }}
+                className="outline-none border-none text-sm px-4 py1 rounded-md text-white bg-red-500 hover:shadow-md"
+                onClick={() => setUpdateRole(false)}
+              >
+                No
+              </motion.button>
             </div>
           </motion.div>
         )}
