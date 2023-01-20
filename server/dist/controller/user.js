@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllUSers = exports.UpdateUser = exports.LoginUser = void 0;
+exports.updateUserRole = exports.getAllUSers = exports.UpdateUser = exports.LoginUser = void 0;
 const firebase_config_1 = __importDefault(require("../config/firebase.config"));
 const userModel_1 = require("../models/userModel");
 const utils_1 = require("../utils/utils");
@@ -27,7 +27,9 @@ const LoginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(505).json({ message: "UnAuthorized" });
         }
         else {
-            const userExist = yield userModel_1.userModel.findOne({ "user_id": decodeValue.user_id });
+            const userExist = yield userModel_1.userModel.findOne({
+                user_id: decodeValue.user_id,
+            });
             if (!userExist) {
                 (0, utils_1.newUserData)(decodeValue, req, res);
             }
@@ -49,7 +51,7 @@ const UpdateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const filter = { _id: req.params.userId };
     const songId = req.query;
     try {
-        console.log(filter, songId);
+        // console.log(filter, songId);
         const result = yield userModel_1.userModel.updateOne(filter, {
             $push: { favourites: songId },
         });
@@ -72,7 +74,21 @@ const getAllUSers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(200).send({ success: true, data: cursor });
     }
     else {
-        res.status(200).send({ success: true, msg: "No Data Found" });
+        res.status(400).send({ success: false, msg: "No Data Found" });
     }
 });
 exports.getAllUSers = getAllUSers;
+const updateUserRole = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const filter = { _id: req.params.userId };
+    const role = req.body.data.role;
+    try {
+        const result = yield userModel_1.userModel.findByIdAndUpdate(filter, { role: role });
+        console.log(result);
+        return res.status(200).send({ user: result });
+    }
+    catch (error) {
+        res.status(400).send({ success: false, msg: error });
+        console.log(error);
+    }
+});
+exports.updateUserRole = updateUserRole;

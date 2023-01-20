@@ -9,4 +9,7 @@ const router = express_1.default.Router();
 router.get("/", user_1.LoginUser);
 router.put("/favourites/:userId", user_1.UpdateUser);
 router.get("/getUsers", user_1.getAllUSers);
+router.put("/updateUser/:userId", user_1.updateUserRole);
+// router.put('/update', (req, res)=>{console.log(`I am here for you`);
+// })
 exports.default = router;
