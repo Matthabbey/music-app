@@ -30,10 +30,10 @@ export const DashboardUserCard = ({ data, index }: any) => {
     });
   };
   const handleDeleteUser = (userId: string) => {
-    console.log(userId)
+    console.log(userId);
     removeUser(userId).then((res) => {
       console.log(res);
-      
+
       if (res) {
         getAllUSers().then((data) => {
           dispatch({
@@ -43,7 +43,6 @@ export const DashboardUserCard = ({ data, index }: any) => {
         });
       }
     });
-
   };
   return (
     <motion.div
@@ -57,7 +56,7 @@ export const DashboardUserCard = ({ data, index }: any) => {
           onClick={() => handleDeleteUser(data._id)}
         >
           {" "}
-          <MdDelete className="text-xl text-red-400 hover:text-red-600" />
+          <i className="text-xl text-red-400 hover:text-red-600"><MdDelete  /></i>
         </motion.div>
       )}
       <div className="w-275 flex item-center justify-center min-w-[160px]">
