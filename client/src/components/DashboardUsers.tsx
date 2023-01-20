@@ -5,18 +5,17 @@ import { motion } from "framer-motion";
 import moment from "moment";
 import { MdDelete } from "react-icons/md";
 import { actionType } from "../context/reducer";
-
-// interface UpdateUserRole{
-//   userId: string | any
-//   role: string | any
-// }
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const DashboardUserCard = ({ data, index }: any) => {
   const [{ user }, dispatch]: any | {} = useStateValue();
   const [updateRole, setUpdateRole] = useState<boolean>(false);
   const createdAt = moment(new Date(data.createdAt)).format("MMMM Do YYYY");
+  const notify = () => toast("Wow so easy!");
 
   const handleUpdateUserRole = (userId: string, role: string) => {
+    notify();
     setUpdateRole(false);
     changingUserRole(userId, role).then((res) => {
       console.log(res);
@@ -31,7 +30,10 @@ export const DashboardUserCard = ({ data, index }: any) => {
     });
   };
   const handleDeleteUser = (userId: string) => {
+    console.log(userId)
     removeUser(userId).then((res) => {
+      console.log(res);
+      
       if (res) {
         getAllUSers().then((data) => {
           dispatch({
@@ -41,19 +43,23 @@ export const DashboardUserCard = ({ data, index }: any) => {
         });
       }
     });
+
   };
   return (
     <motion.div
       key={index}
       className="relative w-full rounded-md flex items-center justify-between-py-4 bg-lightOverlay cursor-pointer hover:bg-card hover:shadow-md"
     >
-      <motion.div
-        whileTap={{ scale: 0.75 }}
-        className="absolute w-8 h-8 left-3 items-center justify-center rounded-md bg-gray-200 flex "
-      >
-        {" "}
-        <MdDelete className="text-xl text-red-400 hover:text-red-600" />
-      </motion.div>
+      {data._id !== user?.user._id && (
+        <motion.div
+          whileTap={{ scale: 0.75 }}
+          className="absolute w-8 h-8 left-3 items-center justify-center rounded-md bg-gray-200 flex "
+          onClick={() => handleDeleteUser(data._id)}
+        >
+          {" "}
+          <MdDelete className="text-xl text-red-400 hover:text-red-600" />
+        </motion.div>
+      )}
       <div className="w-275 flex item-center justify-center min-w-[160px]">
         <img
           src={data.imageUrl}
