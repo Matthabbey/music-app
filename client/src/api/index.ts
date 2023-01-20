@@ -55,7 +55,7 @@ export const getAllAlbums = async () =>{
 
 export const removeUser = async(userId: string)=> {
     try {
-      const res = axios.delete(`${baseURL}/api/user/deleteUser/${userId}`)
+      const res = axios.delete(`${baseURL}api/user/deleteUser/${userId}`)
       return res;
     } catch (error) {
       console.log(error)
@@ -65,9 +65,11 @@ export const removeUser = async(userId: string)=> {
 
   export const changingUserRole = async (userId: string , role: string) => {
     try {
-      const res = axios.put(`${baseURL}/api/user/update/${userId}`, { data : { role : role }});
-      return res;
+      const res = await axios.put(`${baseURL}api/user/updateUser/${userId}`, { data : { role : role }});
+      return res.data;
     } catch (error) {
-      return null;
+        console.log(error);
+        
+    //   return null;
     }
   };

@@ -3,6 +3,7 @@ import { changingUserRole, getAllUSers } from "../api";
 import { useStateValue } from "../context/StateProvider";
 import { motion } from "framer-motion";
 import moment from "moment";
+import {MdDelete} from 'react-icons/md'
 import { actionType } from "../context/reducer";
 
 // interface UpdateUserRole{
@@ -16,6 +17,7 @@ export const DashboardUserCard = ({ data, index }: any) => {
   const createdAt = moment(new Date(data.createdAt)).format("MMMM Do YYYY");
 
   const handleUpdateUserRole = (userId: string, role: string)=>{
+    setUpdateRole(false)
     changingUserRole(userId, role).then((res)=>{
         console.log(res);
         if(res){
@@ -34,6 +36,7 @@ export const DashboardUserCard = ({ data, index }: any) => {
       key={index}
       className="relative w-full rounded-md flex items-center justify-between-py-4 bg-lightOverlay cursor-pointer hover:bg-card hover:shadow-md"
     >
+      <motion.div whileTap={{scale: 0.75}} className="absolute w-8 h-8 left-3 items-center justify-center rounded-md bg-gray-200 flex "> < MdDelete className="text-xl text-red-400 hover:text-red-600"/></motion.div>
       <div className="w-275 flex item-center justify-center min-w-[160px]">
         <img
           src={data.imageUrl}
@@ -85,7 +88,7 @@ export const DashboardUserCard = ({ data, index }: any) => {
               <motion.button
                 whileTap={{ scale: 0.75 }}
                 className="outline-none border-none text-sm px-4 py1 rounded-md text-white bg-blue-500 hover:shadow-md "
-                onClick={()=>handleUpdateUserRole(data._id, data.role === 'admin' ? "Member" : "Admin")}
+                onClick={()=>handleUpdateUserRole(data._id, data.role === 'admin' ? "member" : "admin")}
               >
                 Yes
               </motion.button>
