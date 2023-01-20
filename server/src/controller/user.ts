@@ -79,3 +79,14 @@ export const updateUserRole = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const deleteUser = async (req: Request, res: Response)=>{
+  const filter = { _id: req.params.userId };
+  try {
+    const result = await userModel.findByIdAndDelete(filter)
+    return res.status(200).send({ user: result });
+  } catch (error) {
+    res.status(400).send({ success: false, msg: error });
+    console.log(error);
+  }
+}

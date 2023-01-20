@@ -10,6 +10,7 @@ router.get("/", user_1.LoginUser);
 router.put("/favourites/:userId", user_1.UpdateUser);
 router.get("/getUsers", user_1.getAllUSers);
 router.put("/updateUser/:userId", user_1.updateUserRole);
+router.delete('/deleteUser/:userId', user_1.deleteUser);
 // router.put('/update', (req, res)=>{console.log(`I am here for you`);
 // })
 exports.default = router;

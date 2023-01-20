@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUserRole = exports.getAllUSers = exports.UpdateUser = exports.LoginUser = void 0;
+exports.deleteUser = exports.updateUserRole = exports.getAllUSers = exports.UpdateUser = exports.LoginUser = void 0;
 const firebase_config_1 = __importDefault(require("../config/firebase.config"));
 const userModel_1 = require("../models/userModel");
 const utils_1 = require("../utils/utils");
@@ -92,3 +92,15 @@ const updateUserRole = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.updateUserRole = updateUserRole;
+const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const filter = { _id: req.params.userId };
+    try {
+        const result = yield userModel_1.userModel.findByIdAndDelete(filter);
+        return res.status(200).send({ user: result });
+    }
+    catch (error) {
+        res.status(400).send({ success: false, msg: error });
+        console.log(error);
+    }
+});
+exports.deleteUser = deleteUser;
