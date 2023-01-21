@@ -26,7 +26,7 @@ const DashboardSongs = () => {
     <div className="w-full p-4 flex items-center justify-center flex-col">
       <div className="w-full flex items-center justify-center gap-20">
         <NavLink
-          to={"/dashboard/newSongs"}
+          to={"/dashboard/newsong"}
           className="flex items-center justify-center px-4 py-3 border rounded-md border-gray-300 hover:border-gray-500 hover:shadow-md cursor-pointer"
         >
           {" "}
@@ -68,7 +68,7 @@ const DashboardSongs = () => {
 export const SongContainer = ({data}: any)=>{
   return (
     <div className="w-full flex flex-wrap gap-3 items-center justify-evenly">
-      {data && data.map((song: string, i: string)=>(
+      {data && data.map((song: any, i: string)=>(
         < SongCard key={song._id} data={song} index={i}/>
       ))}
     </div>
