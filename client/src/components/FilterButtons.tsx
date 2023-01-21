@@ -14,11 +14,11 @@ const FilterButtons = ({filterData, flag}: any) => {
             </p>
             {filterData && filterMenu && (
             <motion.div className='w-48 z-50 backdrop-blur-sm max-h-44 overflow-y-scroll scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-400 py-2 flex flex-col rounded-md shadow-md absolute top-8 left-1'>
-                {filterData?.map((data: string)=>(
+                {filterData?.map((data: any)=>(
                     <div key={data.name} 
                     className="flex items-center gap-2 py-1 px-4 hover:bg-gray-200">
                         {(flag === "Artists" || flag === "Album") && (
-                            <img src="" alt="" />
+                            <img src={data.imageURL} alt="" />
                         )}
                         
                     </div>
