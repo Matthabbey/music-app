@@ -83,7 +83,7 @@ const updateUserRole = (req, res) => __awaiter(void 0, void 0, void 0, function*
     const role = req.body.data.role;
     try {
         const result = yield userModel_1.userModel.findByIdAndUpdate(filter, { role: role });
-        console.log(result);
+        // console.log(result);
         return res.status(200).send({ user: result });
     }
     catch (error) {

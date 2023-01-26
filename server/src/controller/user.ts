@@ -70,7 +70,7 @@ export const updateUserRole = async (req: Request, res: Response) => {
       filter,
       { role: role }
     );
-    console.log(result);
+    // console.log(result);
     
     return res.status(200).send({ user: result });
   } catch (error) {

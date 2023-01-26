@@ -32,7 +32,7 @@ const FilterButtons = ({filterData, flag}: any) => {
     <div className='border border-gray-300 px-4 py-1 top-1 rounded-md relative cursor-pointer hover:border-gray-400'>
            <p className='text-base tracking-wide text-textColor flex items-center gap-2' onClick={()=>setFilterMenu(!filterMenu)}> {!filterName  && flag }
             {filterName && ( <> {filterName.length > 15 ? `${filterName.slice(0, 14)}...` : filterName}</> )}
-           <IoChevronDown className={`text-base text-textColor duration-150 transition-all ease-in-out ${filterMenu ? "rotate-180" : "rotate-0"}` }/>
+          <i className={`text-base text-textColor duration-150 transition-all ease-in-out ${filterMenu ? "rotate-180" : "rotate-0"}` }> <IoChevronDown /></i>
             </p>
             {filterData && filterMenu && (
             <motion.div 
