@@ -5,26 +5,29 @@ import FilterButtons from "./FilterButtons";
 import { getAllAlbums, getAllArtists } from "../api/index";
 import { actionType } from "../context/reducer";
 import {BiCloudUpload} from 'react-icons/bi'
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { MdDelete } from "react-icons/md";
+import { filterByLanguage, filters } from "../utils/styles";
 
 const DashboardNewSong = () => {
   const [songName, setSongName] = useState("");
   const [imageUploadProgress, setImageUploadProgress] = useState(0)
   const [songImageCover, setSongImageCover] = useState(null);
   const [imageUploading, setImageUploading] = useState(false);
-  const [{ artists, allAlbums, language, filter }, dispatch]: any =
+  const [{ allArtists, allAlbums, language, filter }, dispatch]: any =
     useStateValue();
 
   useEffect(() => {
-    // if(!artists){
+    if(!allArtists){
     getAllArtists().then((data) => {
     //   console.log(data);
 
       dispatch({
         type: actionType.SET_ALL_ARTISTS,
-        artists: data.artist,
+        allArtists: data.artist,
       });
     });
-    // }
+    }
     if (!allAlbums) {
       getAllAlbums().then((data) => {
         dispatch({
@@ -44,15 +47,19 @@ const DashboardNewSong = () => {
         onChange={(e) => setSongName(e.target.value)}
       />
       <div className="flex w-full justify-between flex-wrap items-center gap-4">
-        <FilterButtons filterData={artists} flag={"Artists"} />
+        <FilterButtons filterData={allArtists} flag={"Artists"} />
         <FilterButtons filterData={allAlbums} flag={"Albums"} />
-        <FilterButtons filterData={language} flag={"Languages"} />
-        <FilterButtons filterData={filter} flag={"Categories"} />
+        <FilterButtons filterData={filterByLanguage} flag={"Languages"} />
+        <FilterButtons filterData={filters} flag={"Categories"} />
       </div>
       <div className="bg-card backdrop-blow-md w-full h-300 rounded-md border-2 border-dotted border-gray-300 cursor-pointer">
         {imageUploading && <DocumentLoader progress={imageUploadProgress} />}
         {!imageUploading && (
-          <>{!songImageCover ? <FileDocumentUploader updateState = {setSongImageCover} setProgress = {setImageUploadProgress} isLoading = {setImageUploading} isImage={true}/> : <div></div>}</>
+          <>{!songImageCover ? <FileDocumentUploader updateState = {setSongImageCover} setProgress = {setImageUploadProgress} isLoading = {setImageUploading} isImage={true}/> : 
+          <div className="relative w-full h-full overflow-hidden rounded-md">
+            <img src={songImageCover} alt="" className="w-full h-full object-cover"/>
+            <button type="submit" className="absolute buttom-3 right-3 rounded-full text-xl cursor-pointer outline-none border-none hover:shadow-md duration-200 transition-all ease-in-out bg-red-500" >  <MdDelete className={"text-w"}/></button>
+            </div>}</>
         )}
       </div>
     </div>
@@ -76,8 +83,26 @@ export const FileDocumentUploader: React.FC<any>= ({ updateState, setProgress, i
 
     const handleUpLoadingDocument: React.FC<any> = (e)=>{
         isLoading(true)
-        const uploaded = e.target.files[0]
-        console.log(uploaded);
+        const uploadedFile = e.target.files[0]
+        console.log(uploadedFile.name)
+
+        const storageRef = ref(storage, `${isImage ? "Images/ " : "Audios/"}${new Date}}-${uploadedFile.name}`)
+
+        const uploadTask = uploadBytesResumable(storageRef, uploadedFile);
+
+        uploadTask.on("state_changed", (snapshot)=>{
+            setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+        },(error)=> {
+            console.log(error)
+        },
+        ()=>{
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+                updateState(downloadURL)
+                isLoading(false)
+                console.log('File available at', downloadURL); 
+            })
+        }
+        )
 
 
         

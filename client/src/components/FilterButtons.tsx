@@ -19,7 +19,7 @@ const FilterButtons = ({filterData, flag}: any) => {
         if(flag === "Album"){
             dispatch({type: actionType.SET_ALL_ALBUMFILTER, albumFilter: name})
         }
-        if(flag === "Language"){
+        if(flag === "Languages"){
             dispatch({type: actionType.SET_ALL_LANGUAGEFILTER, languageFilter: name})
         }
         if(flag === "Categories"){
@@ -41,9 +41,9 @@ const FilterButtons = ({filterData, flag}: any) => {
             exit={{opacity: 0, y: 50}}
             className='w-48 z-50 backdrop-blur-sm max-h-44 overflow-y-scroll scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-400 py-2 flex flex-col rounded-md shadow-md absolute top-8 left-1'>
                 {filterData?.map((data: any)=>(
-                    <div key={data.name} 
+                    <div key={data._id} 
                     className="flex items-center gap-2 py-1 px-4 hover:bg-gray-200" onClick={()=>handleUpdateFilterButton(data.name)}>
-                        {(flag === "Artists" || flag === "Album") && (
+                        {(flag === "Artist" || flag === "Album") && (
                             <img src={data.imageURL} alt="" />
                         )}
                         <p className='w-full'>{data.name.length > 15 ? `${data.name.slice(0, 15)}`: data.name}</p>
