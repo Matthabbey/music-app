@@ -18,7 +18,7 @@ export const validateUser = async (token: string) =>{
 export const getAllUSers = async () =>{
     try {
         const result = await axios.get(`${baseURL}api/user/getUsers`)
-        console.log(result)
+        // console.log(result)
         return result.data
     } catch (error) {
         console.log(error)
@@ -77,7 +77,9 @@ export const removeUser = async(userId: string)=> {
   export const saveNewSong = async (data: any)=>{
         try {
             const res = await axios.post(`${baseURL}api/song/create`, {...data})
+            console.log(res.data.savedSong) 
             return res.data.savedSong
+
         } catch (error) {
             console.log(error);
             

@@ -82,7 +82,11 @@ const DashboardNewSong = () => {
             language: languageFilter,
             category: filterTerm
         };
+        console.log(data);
+        
         saveNewSong(data).then((response)=>{
+            // console.log(response);
+            
             getAllSongs().then(songs=>{
                 dispatch({
                     type: actionType.SET_ALL_SONGS,
