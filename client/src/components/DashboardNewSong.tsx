@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { storage } from "../config/firebase.config";
 import { useStateValue } from "../context/StateProvider";
 import FilterButtons from "./FilterButtons";
-import { getAllAlbums, getAllArtists } from "../api/index";
+import { getAllAlbums, getAllArtists, getAllSongs, saveNewSong } from "../api/index";
 import { actionType } from "../context/reducer";
 import { BiCloudUpload } from "react-icons/bi";
 import {
@@ -25,7 +25,7 @@ const DashboardNewSong = () => {
   const [audioImageCover, setAudioImageCover] = useState(null);
   const [audioUploading, setAudioUploading] = useState(false);
 
-  const [{ allArtists, allAlbums, language, filter }, dispatch]: any =
+  const [{ allArtists, allAlbums, allSongs, artistFilter, albumFilter, filterTerm, languageFilter}, dispatch]: any =
     useStateValue();
 
   useEffect(() => {
@@ -62,11 +62,44 @@ const DashboardNewSong = () => {
       setSongImageCover(null);
       setImageUploading(false);
       setAudioImageCover(null);
-      setAudioUploading(false)
+      setAudioUploading(false);
 
     });
   };
   const handleSavedSong =()=>{
+    if(!songImageCover || !audioImageCover){
+
+    }else {
+      setAudioUploading(true);
+      setImageUploading(true);
+
+        const data = {
+            name: songName,
+            imageURL: songImageCover,
+            songURL: audioImageCover,
+            album: albumFilter,
+            artist: artistFilter,
+            language: languageFilter,
+            category: filterTerm
+        };
+        saveNewSong(data).then((response)=>{
+            getAllSongs().then(songs=>{
+                dispatch({
+                    type: actionType.SET_ALL_SONGS,
+                    allSongs: songs.data
+                })
+            })
+        })
+        setSongName("");
+        setAudioUploading(false);
+        setImageUploading(false);
+        setAudioImageCover(null);
+        setSongImageCover(null);
+        dispatch({type: actionType.SET_ALL_ARTISTFILTER, artistFilter: null});
+        dispatch({type: actionType.SET_ALL_ALBUMFILTER, albumFilter: null});
+        dispatch({type: actionType.SET_ALL_LANGUAGEFILTER, languageFilter: null});
+        dispatch({type: actionType.SET_ALL_FILTERTERM, filterTerm: null});
+    }
 
   }
 
@@ -154,7 +187,7 @@ const DashboardNewSong = () => {
                 <DisableButton />
 
             ) : (
-                <motion.button whileTap={{scale: 0.75}} className="px-8 py-2 w-full cursor-pointer text-white rounded-md bg-red-600 hover:shadow-lg" onClick={()=>handleSavedSong}>
+                <motion.button whileTap={{scale: 0.75}} className="px-8 py-2 w-full cursor-pointer text-white rounded-md bg-red-600 hover:shadow-lg" onClick={()=>handleSavedSong()}>
                     Save Song
                 </motion.button>
             )

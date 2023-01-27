@@ -27,7 +27,7 @@ const Header = () => {
   };
 
   return (
-    <header className="flex items-center w-full p-4 md:py-2 md:px-6">
+    <header className="sticky flex items-center w-full p-4 md:py-2 md:px-6">
       <NavLink to={"/"}>
         <img src={Logo} alt="music" className="w-12 transform rotate-360 duration-500" />
       </NavLink>

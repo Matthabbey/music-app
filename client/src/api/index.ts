@@ -73,3 +73,13 @@ export const removeUser = async(userId: string)=> {
     //   return null;
     }
   };
+
+  export const saveNewSong = async (data: any)=>{
+        try {
+            const res = await axios.post(`${baseURL}api/song/create`, {...data})
+            return res.data.savedSong
+        } catch (error) {
+            console.log(error);
+            
+        }
+  }
