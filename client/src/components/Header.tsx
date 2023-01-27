@@ -46,7 +46,7 @@ const Header = () => {
         <li className="mx-5 text-lg">
           {" "}
           <NavLink
-            to={"/musics"}
+            to={"/dashboard/songs"}
             className={({ isActive }) =>
               isActive ? isActiveStyles : isNotActiveStyles
             }
