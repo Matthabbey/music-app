@@ -13,19 +13,19 @@ export const bgColors = [
 ];
 
 export const filters = [
-  {id: 1, name: "Jasp", value: "Jasp"},
-  {id: 2, name: "Josshh", value: "Josshh"},
-  {id: 3, name: "Mary", value: "Mary"},
-  {id: 4, name: "Doe", value: "Doe"},
-  {id: 5, name: "kizz", value: "kizz"},
-  {id: 6, name: "Wizkid", value: "Wizkid"}
+  {_id: 1, name: "Jasp", value: "Jasp"},
+  {_id: 2, name: "Josshh", value: "Josshh"},
+  {_id: 3, name: "Mary", value: "Mary"},
+  {_id: 4, name: "Doe", value: "Doe"},
+  {_id: 5, name: "kizz", value: "kizz"},
+  {_id: 6, name: "Wizkid", value: "Wizk_id"}
 ]
 export const filterByLanguage = [
-  {id: 1, name: "Turkey", value: "Turkey"},
-  {id: 2, name: "German", value: "German"},
-  {id: 3, name: "Frence", value: "Frence"},
-  {id: 4, name: "Swadi", value: "Swadi"},
-  {id: 5, name: "British-Eng", value: "British-Eng"},
-  {id: 6, name: "Efik", value: "Efik"}
+  {_id: 1, name: "Turkey", value: "Turkey"},
+  {_id: 2, name: "German", value: "German"},
+  {_id: 3, name: "Frence", value: "Frence"},
+  {_id: 4, name: "Swadi", value: "Swadi"},
+  {_id: 5, name: "British-Eng", value: "British-Eng"},
+  {_id: 6, name: "Efik", value: "Efik"}
 ]
 

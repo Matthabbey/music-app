@@ -5,7 +5,7 @@ import FilterButtons from "./FilterButtons";
 import { getAllAlbums, getAllArtists } from "../api/index";
 import { actionType } from "../context/reducer";
 import {BiCloudUpload} from 'react-icons/bi'
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { MdDelete } from "react-icons/md";
 import { filterByLanguage, filters } from "../utils/styles";
 
@@ -37,6 +37,19 @@ const DashboardNewSong = () => {
       });
     }
   }, []);
+
+  const handleDeleteFileObject = (url, isImage) =>{
+    if(isImage){
+        setImageUploading(true)
+    }
+    const deleteRef = ref(storage, url);
+    deleteObject(deleteRef).then(()=>{
+        setSongImageCover(null)
+        setImageUploading(false)
+
+    })
+  }
+
   return (
     <div className="flex flex-col items-center justify-center p-4 border border-gray-300 rounded-md">
       <input
@@ -58,7 +71,7 @@ const DashboardNewSong = () => {
           <>{!songImageCover ? <FileDocumentUploader updateState = {setSongImageCover} setProgress = {setImageUploadProgress} isLoading = {setImageUploading} isImage={true}/> : 
           <div className="relative w-full h-full overflow-hidden rounded-md">
             <img src={songImageCover} alt="" className="w-full h-full object-cover"/>
-            <button type="submit" className="absolute buttom-3 right-3 rounded-full text-xl cursor-pointer outline-none border-none hover:shadow-md duration-200 transition-all ease-in-out bg-red-500" >  <MdDelete className={"text-w"}/></button>
+            <button type="submit" className="absolute buttom-3 right-3 rounded-full text-xl  bg-red-500 cursor-pointer outline-none border-none hover:shadow-md duration-200 transition-all ease-in-out" onClick={()=> handleDeleteFileObject(songImageCover, true)}>  <MdDelete className={"text-white"}/></button>
             </div>}</>
         )}
       </div>
