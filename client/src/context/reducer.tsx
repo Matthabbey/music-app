@@ -40,6 +40,8 @@ const reducer = (state: any, action: any)=>{
             ...state,
             allUsers: action.allUsers
         };
+
+        // Filter Cases
         case actionType.SET_ALL_FILTERTERM:
             return {
                 ...state,

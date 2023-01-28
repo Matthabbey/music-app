@@ -29,4 +29,13 @@ export const filterByLanguage = [
   {_id: 6, name: "Efik", value: "Efik"}
 ]
 
+export const filterByArtist = [
+  {_id: 1, name: "Turkey", value: "Turkey"},
+  {_id: 2, name: "German", value: "German"},
+  {_id: 3, name: "Frence", value: "Frence"},
+  {_id: 4, name: "Swadi", value: "Swadi"},
+  {_id: 5, name: "British-Eng", value: "British-Eng"},
+  {_id: 6, name: "Efik", value: "Efik"}
+]
+
 

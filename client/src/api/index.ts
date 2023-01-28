@@ -74,10 +74,11 @@ export const removeUser = async(userId: string)=> {
     }
   };
 
-  export const saveNewSong = async (data: any)=>{
+  export const saveNewSong = async ({...data}: any)=>{
         try {
             const res = await axios.post(`${baseURL}api/song/create`, {...data})
-            console.log(res.data.savedSong) 
+            console.log(res) 
+            // console.log(res.data.savedSong) 
             return res.data.savedSong
 
         } catch (error) {

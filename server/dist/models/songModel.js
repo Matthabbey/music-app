@@ -28,30 +28,30 @@ const mongoose_1 = __importStar(require("mongoose"));
 const SongSchema = new mongoose_1.Schema({
     name: {
         type: String,
-        required: true
+        // required: true
     },
     imageURL: {
         type: String,
-        required: true
+        // required: true
     },
     category: {
         type: String,
-        required: true
+        // required: true
     },
     songURL: {
         type: String,
-        required: true
+        // required: true
     },
     album: {
         type: String
     },
     artist: {
         type: String,
-        required: true
+        // required: false
     },
     language: {
         type: String,
-        required: true
+        // required: true
     }
 }, { timestamps: true });
 exports.songsModel = mongoose_1.default.model("songs", SongSchema);

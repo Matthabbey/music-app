@@ -14,7 +14,7 @@ const FilterButtons = ({filterData, flag}: any) => {
         setFilterName(name)
 
         if(flag === "Artist"){
-            dispatch({type: actionType.SET_ALL_ARTISTFILTER, artistFilter: name})
+            dispatch({type: actionType.SET_ALL_ARTISTFILTER, filterByArtist: name})
         }
         if(flag === "Album"){
             dispatch({type: actionType.SET_ALL_ALBUMFILTER, albumFilter: name})

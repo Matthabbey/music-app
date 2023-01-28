@@ -14,30 +14,30 @@ export interface SongInstance {
 const SongSchema = new Schema<SongInstance>({
     name: {
         type: String,
-        required: true
+        // required: true
     },
     imageURL: {
         type: String,
-        required: true
+        // required: true
     },
     category: {
         type: String,
-        required: true
+        // required: true
     },
     songURL: {
         type: String,
-        required: true
+        // required: true
     },
     album: {
         type: String
     }, 
     artist: {
         type: String,
-        required: true
+        // required: false
     },
     language: {
         type: String,
-        required: true
+        // required: true
     }
 },
 {timestamps: true}

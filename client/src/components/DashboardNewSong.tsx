@@ -74,35 +74,45 @@ const DashboardNewSong = () => {
       setImageUploading(true);
 
         const data = {
+            artist: allArtists.name,
             name: songName,
             imageURL: songImageCover,
             songURL: audioImageCover,
             album: albumFilter,
-            artist: artistFilter,
             language: languageFilter,
             category: filterTerm
         };
         console.log(data);
+        console.log(data.album);
+        console.log(data.artist);
         
         saveNewSong(data).then((response)=>{
-            // console.log(response);
+            console.log(data);
+            console.log(response);
             
             getAllSongs().then(songs=>{
+                
                 dispatch({
                     type: actionType.SET_ALL_SONGS,
-                    allSongs: songs.data
+                    allSongs: songs.songs
                 })
             })
+            // const result = async()=>{
+            //   const res = await getAllSongs()
+            //   console.log(res);
+            // } 
+            
+            
         })
         setSongName("");
         setAudioUploading(false);
         setImageUploading(false);
         setAudioImageCover(null);
         setSongImageCover(null);
-        dispatch({type: actionType.SET_ALL_ARTISTFILTER, artistFilter: null});
-        dispatch({type: actionType.SET_ALL_ALBUMFILTER, albumFilter: null});
-        dispatch({type: actionType.SET_ALL_LANGUAGEFILTER, languageFilter: null});
-        dispatch({type: actionType.SET_ALL_FILTERTERM, filterTerm: null});
+        // dispatch({type: actionType.SET_ALL_ARTISTFILTER, artistFilter: null});
+        // dispatch({type: actionType.SET_ALL_ALBUMFILTER, albumFilter: null});
+        // dispatch({type: actionType.SET_ALL_LANGUAGEFILTER, languageFilter: null});
+        // dispatch({type: actionType.SET_ALL_FILTERTERM, filterTerm: null});
     }
 
   }

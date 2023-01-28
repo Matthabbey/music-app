@@ -19,6 +19,8 @@ export const CreateSongs = async (req: Request, res: Response) => {
       .status(201)
       .json({ message: "New Song Successfully created", savedSong});
   } catch (error) {
+    console.log(error);
+    
     return res.status(500).json({ message: "Failed to save Song", error });
   }
 };
