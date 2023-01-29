@@ -25,6 +25,18 @@ const DashboardNewSong = () => {
   const [audioImageCover, setAudioImageCover] = useState(null);
   const [audioUploading, setAudioUploading] = useState(false);
 
+  const [artistUploadProgress, setArtistUploadProgress] = useState(0)
+  const [artistImageCover, setArtistImageCover] = useState(null)
+  const [artistUploading, setArtistUploading] = useState(false)
+  const [artistName, setArtistName] = useState("")
+  const [twitter, setTwitter] = useState("")
+  const [instagram, setInstagram] = useState("")
+
+  const [albumUploadingProgress, setAlbumUploadingProgress] = useState(0)
+  const [albumImageCover, setAlbumImageCover] = useState(null)
+  const [albumUploading, setAlbumUploading] = useState(false)
+  const [albumName, setAlbumName] = useState("")
+
   const [{ allArtists, allAlbums, allSongs, artistFilter, albumFilter, filterTerm, languageFilter}, dispatch]: any =
     useStateValue();
 
@@ -109,10 +121,10 @@ const DashboardNewSong = () => {
         setImageUploading(false);
         setAudioImageCover(null);
         setSongImageCover(null);
-        // dispatch({type: actionType.SET_ALL_ARTISTFILTER, artistFilter: null});
-        // dispatch({type: actionType.SET_ALL_ALBUMFILTER, albumFilter: null});
-        // dispatch({type: actionType.SET_ALL_LANGUAGEFILTER, languageFilter: null});
-        // dispatch({type: actionType.SET_ALL_FILTERTERM, filterTerm: null});
+        dispatch({type: actionType.SET_ALL_ARTISTFILTER, artistFilter: null});
+        dispatch({type: actionType.SET_ALL_ALBUMFILTER, albumFilter: null});
+        dispatch({type: actionType.SET_ALL_LANGUAGEFILTER, languageFilter: null});
+        dispatch({type: actionType.SET_ALL_FILTERTERM, filterTerm: null});
     }
 
   }
@@ -185,6 +197,39 @@ const DashboardNewSong = () => {
                   type="submit"
                   className="absolute buttom-2 right-0 rounded-full text-2xl  bg-red-500 cursor-pointer outline-none border-none hover:shadow-md duration-200 transition-all ease-in-out"
                   onClick={() => handleDeleteFileObject(audioImageCover, false)}
+                >
+                  {" "}
+                  <i className={"text-white cursor-pointer"}><MdDelete  /></i>
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
+      {/* Image Uploader for artist */}
+      <div className="bg-card backdrop-blow-md w-full h-300 rounded-md border-2 border-dotted border-gray-300 cursor-pointer">
+        {artistUploading && <DocumentLoader progress={artistUploadProgress} />}
+        {!artistUploading && (
+          <>
+            {!artistImageCover ? (
+              <FileDocumentUploader
+                updateState={setArtistImageCover}
+                setProgress={setArtistUploadProgress}
+                isLoading={setArtistUploading}
+                isImage={true}
+              />
+            ) : (
+              <div className="relative top-3 w-full h-full flex items-center justify-center rounded-md">
+                <audio
+                  src={artistImageCover}
+                  controls
+                  className="w-[980px]"
+                />
+                <button
+                  type="submit"
+                  className="absolute buttom-2 right-0 rounded-full text-2xl  bg-red-500 cursor-pointer outline-none border-none hover:shadow-md duration-200 transition-all ease-in-out"
+                  onClick={() => handleDeleteFileObject(artistImageCover, false)}
                 >
                   {" "}
                   <i className={"text-white cursor-pointer"}><MdDelete  /></i>
