@@ -208,6 +208,7 @@ const DashboardNewSong = () => {
       </div>
 
       {/* Image Uploader for artist */}
+      <p className="text-textColor text-xl font-semibold">Artist Details</p>
       <div className="bg-card backdrop-blow-md w-full h-300 rounded-md border-2 border-dotted border-gray-300 cursor-pointer">
         {artistUploading && <DocumentLoader progress={artistUploadProgress} />}
         {!artistUploading && (
@@ -229,7 +230,7 @@ const DashboardNewSong = () => {
                 <button
                   type="submit"
                   className="absolute buttom-2 right-0 rounded-full text-2xl  bg-red-500 cursor-pointer outline-none border-none hover:shadow-md duration-200 transition-all ease-in-out"
-                  onClick={() => handleDeleteFileObject(artistImageCover, false)}
+                  onClick={() => handleDeleteFileObject(artistImageCover, true)}
                 >
                   {" "}
                   <i className={"text-white cursor-pointer"}><MdDelete  /></i>
@@ -325,7 +326,7 @@ export const FileDocumentUploader: React.FC<any> = ({
             <BiCloudUpload />
           </i>
           <p>
-            Click here to upload {isImage ? "song image cover" : "an audio"}
+            Click here to upload {isImage ? "image cover" : "an audio"}
           </p>
         </div>
       </div>
