@@ -8,10 +8,10 @@ export const CreateAlbums = async (req: Request, res: Response) => {
     imageURL
   });
   try {
-    const savedArtist = await newArtist.save();
+    const savedAlbum = await newArtist.save();
     return res
       .status(201)
-      .json({ message: "New Album Successfully created", savedArtist });
+      .json({ message: "New Album Successfully created", savedAlbum });
   } catch (error) {
     return res.status(500).json({ message: "Failed to save Album", error });
   }

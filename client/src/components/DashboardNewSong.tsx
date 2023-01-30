@@ -7,6 +7,7 @@ import {
   getAllArtists,
   getAllSongs,
   saveArtist,
+  SavedAlbum,
   saveNewSong,
 } from "../api/index";
 import { actionType } from "../context/reducer";
@@ -84,13 +85,19 @@ const DashboardNewSong = () => {
     if (isImage) {
       setImageUploading(true);
       setAudioUploading(true);
+      setAlbumUploading(true);
+      setArtistUploading(true)
     }
     const deleteRef = ref(storage, url);
     deleteObject(deleteRef).then(() => {
       setSongImageCover(null);
       setImageUploading(false);
       setAudioImageCover(null);
+      setArtistImageCover(null);
+      setAlbumImageCover(null)
       setAudioUploading(false);
+      setAlbumUploading(false);
+      setArtistUploading(false)
     });
   };
   const handleSavedSong = () => {
@@ -157,12 +164,36 @@ const DashboardNewSong = () => {
       setArtistUploading(false);
       setArtistImageCover(null);
       setTwitter("");
-      setInstagram("")
+      setInstagram("");
 
       // dispatch({ type: actionType.SET_ALL_ARTISTS, artistName: null });
       // dispatch({ type: actionType.SET_ALL_ARTISTS, artistName: null });
     }
   };
+  const handleSavedAlbum = ()=>{
+    if(! albumName || !albumImageCover){
+
+    }else{
+      setAlbumUploading(true)
+
+      const data ={
+        name: albumName,
+        imageURL: albumImageCover
+      }
+
+      SavedAlbum(data).then((res)=>{
+        getAllAlbums().then(data =>{
+          dispatch({
+            type: actionType.SET_ALL_ALBUMS,
+            allAlbums: data.album
+          })
+        })
+      })
+      setAlbumName("")
+      setAlbumImageCover(null)
+      setAlbumUploading(false);
+    }
+  }
   return (
     <div className="flex flex-col items-center justify-center p-2 border border-gray-300 rounded-md gap-4">
       <input
@@ -242,7 +273,6 @@ const DashboardNewSong = () => {
           </>
         )}
       </div>
-
       <div className="flex items-center justify-center w-60 p-5">
         {audioUploading || imageUploading ? (
           <DisableButton />
@@ -258,6 +288,40 @@ const DashboardNewSong = () => {
       </div>
       {/* Image Uploader for artist */}
       <p className="text-headingColor text-xl font-semibold">Artist Details</p>
+      {/* Input Artist name */}
+      <input
+        type="text"
+        placeholder="Artist name"
+        className="w-full p-3 rounded-md text-base font-semibold text-textColor outline-none shadow-sm border border-gray-300 bg-transparent"
+        value={artistName}
+        onChange={(e) => setArtistName(e.target.value)}
+      />
+      {/* Twitter field */}
+      <div className="flex items-center rounded-md p-3 w-full border border-gray-300">
+        <p className="text-base font-semibold border-gray-300">
+          www.twitter.com/
+        </p>
+        <input
+          type="text"
+          placeholder="userId"
+          className="w-full text-base font-semibold text-textColor outline-none bg-transparent"
+          value={twitter}
+          onChange={(e) => setTwitter(e.target.value)}
+        />
+      </div>
+      {/*/ Instagram Input Field */}
+      <div className="flex items-center rounded-md p-3 w-full border border-gray-300">
+        <p className="text-base font-semibold border-gray-300">
+          www.instagram.com/
+        </p>
+        <input
+          type="text"
+          placeholder="userId"
+          className="w-full text-base font-semibold text-textColor outline-none bg-transparent"
+          value={twitter}
+          onChange={(e) => setInstagram(e.target.value)}
+        />
+      </div>
       <div className="bg-card backdrop-blow-md w-full h-300 rounded-md border-2 border-dotted border-gray-300 cursor-pointer">
         {artistUploading && <DocumentLoader progress={artistUploadProgress} />}
         {!artistUploading && (
@@ -293,40 +357,6 @@ const DashboardNewSong = () => {
           </>
         )}
       </div>
-      {/* Input Artist name */}
-      <input
-        type="text"
-        placeholder="Artist name"
-        className="w-full p-3 rounded-md text-base font-semibold text-textColor outline-none shadow-sm border border-gray-300 bg-transparent"
-        value={artistName}
-        onChange={(e) => setArtistName(e.target.value)}
-      />
-      {/* Twitter field */}
-      <div className="flex items-center rounded-md p-3 w-full border border-gray-300">
-        <p className="text-base font-semibold border-gray-300">
-          www.twitter.com/
-        </p>
-        <input
-          type="text"
-          placeholder="userId"
-          className="w-full text-base font-semibold text-textColor outline-none bg-transparent"
-          value={twitter}
-          onChange={(e) => setTwitter(e.target.value)}
-        />
-      </div>
-      {/*/ Instagram Input Field */}
-      <div className="flex items-center rounded-md p-3 w-full border border-gray-300">
-        <p className="text-base font-semibold border-gray-300">
-          www.instagram.com/
-        </p>
-        <input
-          type="text"
-          placeholder="userId"
-          className="w-full text-base font-semibold text-textColor outline-none bg-transparent"
-          value={twitter}
-          onChange={(e) => setInstagram(e.target.value)}
-        />
-      </div>
 
       {/* button option */}
       <div className="flex items-center justify-center w-60 p-5">
@@ -339,6 +369,62 @@ const DashboardNewSong = () => {
             onClick={() => handleSavedArtist()}
           >
             Save Artist
+          </motion.button>
+        )}
+      </div>
+      {/* Album Information*/}
+      <p className="text-headingColor text-xl font-semibold">Album Details</p>
+      {/* Input Album name */}
+      <input
+        type="text"
+        placeholder="Artist name"
+        className="w-full p-3 rounded-md text-base font-semibold text-textColor outline-none shadow-sm border border-gray-300 bg-transparent"
+        value={albumName}
+        onChange={(e) => setAlbumName(e.target.value)}
+      />
+      <div className="bg-card backdrop-blow-md w-full h-300 rounded-md border-2 border-dotted border-gray-300 cursor-pointer">
+        {albumUploading && <DocumentLoader progress={albumUploadingProgress} />}
+        {!albumUploading && (
+          <>
+            {!albumImageCover ? (
+              <FileDocumentUploader
+                updateState={setAlbumImageCover}
+                setProgress={setAlbumUploadingProgress}
+                isLoading={setAlbumUploading}
+                isImage={true}
+              />
+            ) : (
+              <div className="relative w-full h-full flex items-center justify-center rounded-md">
+                <img
+                  src={albumImageCover}
+                  alt="image"
+                  className="w-full h-full object-cover"
+                />
+                <button
+                  type="submit"
+                  className="absolute buttom-2 right-0 rounded-full text-2xl  bg-red-500 cursor-pointer outline-none border-none hover:shadow-md duration-200 transition-all ease-in-out"
+                  onClick={() => handleDeleteFileObject(albumImageCover, true)}
+                >
+                  {" "}
+                  <i className={"text-white cursor-pointer"}>
+                    <MdDelete />
+                  </i>
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+      <div className="flex items-center justify-center w-60 p-5">
+        {artistUploading ? (
+          <DisableButton />
+        ) : (
+          <motion.button
+            whileTap={{ scale: 0.75 }}
+            className="px-8 py-2 w-full cursor-pointer text-white rounded-md bg-red-600 hover:shadow-lg"
+            onClick={() => handleSavedArtist()}
+          >
+            Save Album
           </motion.button>
         )}
       </div>

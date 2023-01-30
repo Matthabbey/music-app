@@ -18,10 +18,10 @@ const CreateAlbums = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         imageURL
     });
     try {
-        const savedArtist = yield newArtist.save();
+        const savedAlbum = yield newArtist.save();
         return res
             .status(201)
-            .json({ message: "New Album Successfully created", savedArtist });
+            .json({ message: "New Album Successfully created", savedAlbum });
     }
     catch (error) {
         return res.status(500).json({ message: "Failed to save Album", error });

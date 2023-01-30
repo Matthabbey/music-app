@@ -97,3 +97,14 @@ export const removeUser = async(userId: string)=> {
         
     }
   }
+
+  export const SavedAlbum = async({...data})=>{
+    try {
+        const res = await axios.post(`${baseURL}api/album/create`, {...data})
+        console.log(res)
+        return res.data.savedAlbum
+    } catch (error) {
+        console.log(error);
+        
+    }
+  }
