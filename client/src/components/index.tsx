@@ -1,4 +1,5 @@
 export {default as Login} from "./Login";
+import AlertMessages from './AlertMessages';
 export { default as Home} from "./Home";
 export {default as Header} from "./Header";
 
@@ -10,3 +11,4 @@ export {default as DashboardAlbums} from './DashboardAlbums';
 export {default as DashboardNewSong} from './DashboardNewSong';
 export {default as DashboardArtists} from './DashboardArtists';
 export { default as SongCard } from './SongCard'
+export { default as AlertMessages} from './AlertMessages'

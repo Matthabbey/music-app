@@ -8,7 +8,8 @@ export const actionType = {
     SET_ALL_FILTERTERM : "SET_ALL_FILTERTERM",
     SET_ALL_ARTISTFILTER: "SET_ALL_ARTISTFILTER",
     SET_ALL_LANGUAGEFILTER: "SET_ALL_LANGUAGEFILTER",
-    SET_ALL_ALBUMFILTER: "SET_ALL_ALBUMFILTER"
+    SET_ALL_ALBUMFILTER: "SET_ALL_ALBUMFILTER",
+    SET_ALL_ALERTMESSAGES: "SET_ALL_ALERTMESSAGES"
 }
 
 const reducer = (state: any, action: any)=>{
@@ -61,6 +62,13 @@ const reducer = (state: any, action: any)=>{
             return {
                 ...state,
                 albumFilter: action.albumFilter
+            }
+
+            //All Alert Message
+        case actionType.SET_ALL_ALERTMESSAGES:
+            return {
+                ...state,
+                allAlertMassages: action.allAlertMassages
             }
 
         default: return state
