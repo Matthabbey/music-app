@@ -9,8 +9,13 @@ import DashboardSongs from './DashboardSongs';
 import DashboardArtists from './DashboardArtists';
 import DashboardAlbums from './DashboardAlbums';
 import DashboardNewSong from './DashboardNewSong';
+import AlertMessages from './AlertMessages';
+import { useStateValue } from '../context/StateProvider';
 
 const Dashboard = () => {
+
+  const [{ allAlertMassages }, dispatch]: any = useStateValue()
+  
   return (
     <div className='w-full h-auto flex flex-col items-center justify-center bg-primary'>
         <Header />
@@ -36,6 +41,10 @@ const Dashboard = () => {
         <Route path='/newsong' element={<DashboardNewSong />}/>
       </Routes>
     </div>
+    {allAlertMassages && (
+
+    <AlertMessages type={"danger"}/>
+    )}
 
     </div>
   )

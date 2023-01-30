@@ -53,6 +53,7 @@ const DashboardNewSong = () => {
       albumFilter,
       filterTerm,
       languageFilter,
+      allAlertMassages
     },
     dispatch,
   ]: any = useStateValue();
@@ -86,10 +87,31 @@ const DashboardNewSong = () => {
       setImageUploading(true);
       setAudioUploading(true);
       setAlbumUploading(true);
-      setArtistUploading(true)
+      setArtistUploading(true);
+      dispatch({
+        type: actionType.SET_ALL_ALERTMESSAGES,
+        allAlertMassages: "success"
+      })
+      setInterval(()=>{
+        dispatch({
+          type: actionType.SET_ALL_ALERTMESSAGES,
+          allAlertMassages: "success"
+        })
+      }, 4000)
     }
     const deleteRef = ref(storage, url);
     deleteObject(deleteRef).then(() => {
+      dispatch({
+        type: actionType.SET_ALL_ALERTMESSAGES,
+        allAlertMassages: "danger"
+      })
+      setInterval(()=>{
+        dispatch({
+          type: actionType.SET_ALL_ALERTMESSAGES,
+          allAlertMassages: "danger"
+        }, 4000)
+      })
+
       setSongImageCover(null);
       setImageUploading(false);
       setAudioImageCover(null);
@@ -102,6 +124,7 @@ const DashboardNewSong = () => {
   };
   const handleSavedSong = () => {
     if (!songImageCover || !audioImageCover) {
+
     } else {
       setAudioUploading(true);
       setImageUploading(true);
