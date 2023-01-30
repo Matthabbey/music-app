@@ -50,7 +50,7 @@ const DashboardSongs = () => {
         </i>
       </div>
       {/* Main container */}
-      <div className="relative border w-full p-4 my-4 border-gray-300">
+      <div className="relative border w-full p-4 my-4 py-12 border-gray-300">
         <div className="absolute top-4 left-4">
           <p className="text-xl font-bold">
             <span className="text-sm font-semibold text-textColor">

@@ -95,7 +95,7 @@ const DashboardNewSong = () => {
       setInterval(()=>{
         dispatch({
           type: actionType.SET_ALL_ALERTMESSAGES,
-          allAlertMassages: "success"
+          allAlertMassages: null
         })
       }, 4000)
     }
@@ -108,15 +108,15 @@ const DashboardNewSong = () => {
       setInterval(()=>{
         dispatch({
           type: actionType.SET_ALL_ALERTMESSAGES,
-          allAlertMassages: "danger"
+          allAlertMassages: null
         }, 4000)
       })
 
       setSongImageCover(null);
       setImageUploading(false);
       setAudioImageCover(null);
-      setArtistImageCover(null);
       setAlbumImageCover(null)
+      setArtistImageCover(null);
       setAudioUploading(false);
       setAlbumUploading(false);
       setArtistUploading(false)
@@ -124,6 +124,16 @@ const DashboardNewSong = () => {
   };
   const handleSavedSong = () => {
     if (!songImageCover || !audioImageCover) {
+      dispatch({
+        type: actionType.SET_ALL_ALERTMESSAGES,
+        allAlertMassages: "danger"
+      })
+      setInterval(()=>{
+        dispatch({
+          type: actionType.SET_ALL_ALERTMESSAGES,
+          allAlertMassages: null
+        })
+      }, 4000)
 
     } else {
       setAudioUploading(true);
@@ -150,6 +160,17 @@ const DashboardNewSong = () => {
           });
         });
       });
+      //Alert message
+      dispatch({
+        type: actionType.SET_ALL_ALERTMESSAGES,
+        allAlertMassages: "success"
+      })
+      setInterval(()=>{
+        dispatch({
+          type: actionType.SET_ALL_ALERTMESSAGES,
+          allAlertMassages: null
+        })
+      }, 4000)
       setSongName("");
       setAudioUploading(false);
       setImageUploading(false);
@@ -166,7 +187,17 @@ const DashboardNewSong = () => {
   };
   const handleSavedArtist = () => {
     if (!artistImageCover || !artistName || !twitter || !instagram) {
-      //
+      // Error alert
+      dispatch({
+        type: actionType.SET_ALL_ALERTMESSAGES,
+        allAlertMassages: "danger "
+      })
+      setInterval(()=>{
+        dispatch({
+          type: actionType.SET_ALL_ALERTMESSAGES,
+          allAlertMassages: null
+        })
+      }, 4000)
     } else {
       setArtistUploading(true);
       const data = {
@@ -195,7 +226,17 @@ const DashboardNewSong = () => {
   };
   const handleSavedAlbum = ()=>{
     if(! albumName || !albumImageCover){
-
+      // erreor alert
+      dispatch({
+        type: actionType.SET_ALL_ALERTMESSAGES,
+        allAlertMassages: "danger"
+      })
+      setInterval(()=>{
+        dispatch({
+          type: actionType.SET_ALL_ALERTMESSAGES,
+          allAlertMassages: null
+        })
+      }, 4000)
     }else{
       setAlbumUploading(true)
 
@@ -212,6 +253,17 @@ const DashboardNewSong = () => {
           })
         })
       })
+      //success alert
+      dispatch({
+        type: actionType.SET_ALL_ALERTMESSAGES,
+        allAlertMassages: "success"
+      })
+      setInterval(()=>{
+        dispatch({
+          type: actionType.SET_ALL_ALERTMESSAGES,
+          allAlertMassages: null
+        })
+      }, 4000)
       setAlbumName("")
       setAlbumImageCover(null)
       setAlbumUploading(false);
@@ -502,6 +554,7 @@ export const FileDocumentUploader: React.FC<any> = ({
   isLoading,
   isImage,
 }) => {
+  const [{allAlertMassages}, dispatch]: any = useStateValue()
   const handleUpLoadingDocument = (e: any) => {
     isLoading(true);
     const uploadedFile = e.target.files[0];
@@ -521,6 +574,16 @@ export const FileDocumentUploader: React.FC<any> = ({
       },
       (error) => {
         console.log(error);
+        dispatch({
+          type: actionType.SET_ALL_ALERTMESSAGES,
+          allAlertMassages: "success"
+        })
+        setInterval(()=>{
+          dispatch({
+            type: actionType.SET_ALL_ALERTMESSAGES,
+            allAlertMassages: ""
+          })
+        }, 4000)
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -528,6 +591,16 @@ export const FileDocumentUploader: React.FC<any> = ({
           isLoading(false);
           console.log("File available at", downloadURL);
         });
+        dispatch({
+          type: actionType.SET_ALL_ALERTMESSAGES,
+          allAlertMassages: "success"
+        })
+        setInterval(()=>{
+          dispatch({
+            type: actionType.SET_ALL_ALERTMESSAGES,
+            allAlertMassages: ""
+          })
+        }, 4000)
       }
     );
   };
@@ -554,3 +627,7 @@ export const FileDocumentUploader: React.FC<any> = ({
 };
 
 export default DashboardNewSong;
+function dispatch(arg0: { type: string; allAlertMassages: string; }) {
+  throw new Error("Function not implemented.");
+}
+
