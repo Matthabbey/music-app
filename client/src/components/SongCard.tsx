@@ -1,9 +1,16 @@
 import { motion } from "framer-motion";
 import { duration } from "moment";
-import React from "react";
+import React, { useState }from "react";
 import { IoTrash } from "react-icons/io5";
 
-const SongCard = ({ data, index }: any) => {
+const SongCard = ({ data, index }: any, type: string) => {
+const [isDelete, setIsDelete] = useState(false)
+
+const handleDeleteAlbum = () => {
+if(type === "songs"){
+
+}
+}
   return (
     <motion.div className="relative w-50 min-w-210 px-2 py-3 cursor-pointer hover:bg-card items-center flex flex-col shadow-md hover:bg-gray-100 rounded-lg">
         <div className="w-40 min-w-[160px] h-40 min-h-[160px] rounded-lg drop-shadow-lg relative overflow-hidden">
@@ -18,21 +25,27 @@ const SongCard = ({ data, index }: any) => {
         <div className="w-full bottom-2 right-0 absolute flex items-center justify-between">
           <motion.i whileTap={{scale: 0.75}}
           className="text-base text-red-400 drop-shadow-md hover:text-red-600"
+          onClick={()=>setIsDelete(true)}
           >
             <IoTrash/>
           </motion.i>
         </div>
+          {isDelete && (
 
-        <motion.div className="absolute inset-0 backdrop-blur-md bg-cardOverlay flex items-center justify-center flex-col px-4 py-4" initial={{ opacity: 0}}
-        animate={{opacity: 1, transition: {duration: 300}}}>
+            <motion.div className="absolute inset-0 backdrop-blur-md bg-cardOverlay flex items-center justify-center flex-col px-4 py-4" initial={{ opacity: 0}}
+            animate={{opacity: 1}}>
             <p className="text-center uppercase text-sm text-headingColor">are you sure, you want to delete it?</p>
             <div className="gap-4 flex items-center">
-              <motion.button className="uppercase text-red-500 text-sm px-4 py-3 font-bold cursor-pointer hover:text-red-700" whileTap={{scale: 0.7}}>Yes</motion.button>
-              <motion.button className="uppercase text-green-600 text-sm px-4 py-3 font-bold hover:text-green-800 rounded-md" whileTap={{scale: 0.7}}>No</motion.button>
+              <motion.button className="uppercase text-red-500 text-sm px-4 py-3 font-bold cursor-pointer hover:text-red-700" whileTap={{scale: 0.7}} onClick={handleDeleteAlbum}>Yes</motion.button>
+              <motion.button className="uppercase text-green-600 text-sm px-4 py-3 font-bold hover:text-green-800 rounded-md" whileTap={{scale: 0.7}} onClick={()=>setIsDelete(false)}>No</motion.button>
             </div>
         </motion.div>
+          )}
     </motion.div>
   );
 };
 
 export default SongCard;
+
+
+

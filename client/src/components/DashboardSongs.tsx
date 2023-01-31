@@ -69,7 +69,7 @@ export const SongContainer = ({data}: any)=>{
   return (
     <div className="w-full flex flex-wrap gap-3 items-center justify-evenly">
       {data && data.map((song: any, i: string)=>(
-        < SongCard key={song._id} data={song} index={i}/>
+        < SongCard key={song._id} data={song} index={i} type="song"/>
       ))}
     </div>
   )
