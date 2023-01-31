@@ -10,11 +10,10 @@ const DashboardAlbums = () => {
   useEffect(() => {
     if (!allAlbums) {
       getAllAlbums().then((data) => {
-        console.log(data);
         
         dispatch({
-          type: actionType.SET_ALL_ARTISTS,
-          allArtists: data.name,
+          type: actionType.SET_ALL_ALBUMS,
+          allAlbums: data.album,
         });
       });
     }
@@ -22,8 +21,9 @@ const DashboardAlbums = () => {
   return (
 
       <div className="w-full p-4 flex items-center justify-center flex-col">
-        <div className="relative border w-full p-4 my-4 py-12 border-gray-300"></div>
+        <div className="relative w-full p-4 my-4 py-12 border border-gray-300">
         <ArtistContainer data={allAlbums}/>
+        </div>
       </div>
   );
 };

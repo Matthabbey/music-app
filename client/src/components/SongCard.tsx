@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { duration } from "moment";
 import React from "react";
 import { IoTrash } from "react-icons/io5";
 
@@ -21,6 +22,15 @@ const SongCard = ({ data, index }: any) => {
             <IoTrash/>
           </motion.i>
         </div>
+
+        <motion.div className="absolute inset-0 backdrop-blur-md bg-cardOverlay flex items-center justify-center flex-col px-4 py-4" initial={{ opacity: 0}}
+        animate={{opacity: 1, transition: {duration: 300}}}>
+            <p className="text-center uppercase text-sm text-headingColor">are you sure, you want to delete it?</p>
+            <div className="gap-4 flex items-center">
+              <motion.button className="uppercase text-red-500 text-sm px-4 py-3 font-bold cursor-pointer hover:text-red-700" whileTap={{scale: 0.7}}>Yes</motion.button>
+              <motion.button className="uppercase text-green-600 text-sm px-4 py-3 font-bold hover:text-green-800 rounded-md" whileTap={{scale: 0.7}}>No</motion.button>
+            </div>
+        </motion.div>
     </motion.div>
   );
 };
