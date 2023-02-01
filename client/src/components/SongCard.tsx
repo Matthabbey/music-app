@@ -3,64 +3,67 @@ import { motion } from "framer-motion";
 import { duration } from "moment";
 import React, { useState }from "react";
 import { IoTrash } from "react-icons/io5";
-import { deleteAlbumById, deleteSong, getAllAlbums, getAllSongs } from "../api";
+import { deleteAlbumById, deleteArtistById, deleteSong, getAllAlbums, getAllArtists, getAllSongs } from "../api";
 import { storage } from "../config/firebase.config";
 import { actionType } from "../context/reducer";
 import { useStateValue } from '../context/StateProvider';
 
-const SongCard = ({ data, index }: any, type: string) => {
+const SongCard = ({ data, index }: any, type: any) => {
 const [isDelete, setIsDelete] = useState(false)
-const [{ allSongs }, dispatch]:any = useStateValue()
+const [{ allSongs,  }, dispatch]:any = useStateValue()
 
 const handleDeleteAlbum = (data: any) => {
-if(type === "songs"){
-  const deleteRef = ref(storage, data.imageURL)
-  deleteObject(deleteRef).then(()=>{})
-  deleteSong(data._id).then((res) => {
-      if (res?.data) {
-          dispatch({
-            type: actionType.SET_ALL_USERS,
-            allAlertMassages: "success",
-          });
-          setInterval(()=>{
-            dispatch({
-              type: actionType.SET_ALL_USERS,
-              allAlertMassages: "",
-            });
-          }, 3000)
-          getAllSongs().then((data)=>{
-            dispatch({
-              type: actionType.SET_ALL_SONGS,
-              allSongs: data.songs
-            })
-          })
-        } else {
-          dispatch({
-            type: actionType.SET_ALL_USERS,
-            allAlertMassages: "danger",
-          });
-          setInterval(()=>{
-            dispatch({
-              type: actionType.SET_ALL_USERS,
-              allAlertMassages: "",
-            });
-          }, 3000)
-        }
-      },
-    )};
-
+  console.log(type);
+  
+  //Songs delete function
+// if(type === "songs"){
+//   const deleteRef = ref(storage, data.imageURL)
+//   deleteObject(deleteRef).then(()=>{})
+//   deleteSong(data._id).then((res) => {
+//       if (res?.data) {
+//           dispatch({
+//             type: actionType.SET_ALL_USERS,
+//             allAlertMassages: "success",
+//           });
+//           setInterval(()=>{
+//             dispatch({
+//               type: actionType.SET_ALL_USERS,
+//               allAlertMassages: "",
+//             });
+//           }, 3000)
+//           getAllSongs().then((data)=>{
+//             dispatch({
+//               type: actionType.SET_ALL_SONGS,
+//               allSongs: data.songs
+//             })
+//           })
+//         } else {
+//           dispatch({
+//             type: actionType.SET_ALL_USERS,
+//             allAlertMassages: "danger",
+//           });
+//           setInterval(()=>{
+//             dispatch({
+//               type: actionType.SET_ALL_USERS,
+//               allAlertMassages: "",
+//             });
+//           }, 3000)
+//         }
+//       },
+//     )};
+// Album delete function
     if(type === "album"){
       const deleteRef = ref(storage, data.imageURL)
       deleteObject(deleteRef).then(()=>{})
       deleteAlbumById(data._id).then((res) => {
           if (res?.data) {
               dispatch({
-                type: actionType.SET_ALL_USERS,
+                type: actionType.SET_ALL_ALBUMS,
                 allAlertMassages: "success",
               });
               setInterval(()=>{
                 dispatch({
-                  type: actionType.SET_ALL_USERS,
+                  type: actionType.SET_ALL_ALBUMS,
                   allAlertMassages: "",
                 });
               }, 3000)
@@ -84,6 +87,44 @@ if(type === "songs"){
             }
           },
         )};
+// Artist delete function
+
+// if(type === "artist"){
+//   const deleteRef = ref(storage, data.imageURL)
+//   deleteObject(deleteRef).then(()=>{})
+//   deleteArtistById(data._id).then((res) => {
+//       if (res?.data) {
+//           dispatch({
+//             type: actionType.SET_ALL_USERS,
+//             allAlertMassages: "success",
+//           });
+//           setInterval(()=>{
+//             dispatch({
+//               type: actionType.SET_ALL_USERS,
+//               allAlertMassages: "",
+//             });
+//           }, 3000)
+//           getAllArtists().then((data)=>{
+//             dispatch({
+//               type: actionType.SET_ALL_ARTISTS,
+//               allArtists: data.artist
+//             })
+//           })
+//         } else {
+//           dispatch({
+//             type: actionType.SET_ALL_ALERTMESSAGES,
+//             allAlertMassages: "danger",
+//           });
+//           setInterval(()=>{
+//             dispatch({
+//               type: actionType.SET_ALL_ALERTMESSAGES,
+//               allAlertMassages: "",
+//             });
+//           }, 3000)
+//         }
+//       },
+//     )};
+
   };
   return (
     <motion.div className="relative w-50 min-w-210 px-2 py-3 cursor-pointer hover:bg-card items-center flex flex-col shadow-md hover:bg-gray-100 rounded-lg">

@@ -497,7 +497,7 @@ const DashboardNewSong = () => {
           <motion.button
             whileTap={{ scale: 0.75 }}
             className="px-8 py-2 w-full cursor-pointer text-white rounded-md bg-red-600 hover:shadow-lg"
-            onClick={() => handleSavedArtist()}
+            onClick={() => handleSavedAlbum()}
           >
             Save Album
           </motion.button>
