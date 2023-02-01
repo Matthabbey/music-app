@@ -2,15 +2,26 @@ import { motion } from "framer-motion";
 import { duration } from "moment";
 import React, { useState }from "react";
 import { IoTrash } from "react-icons/io5";
+import { deleteSong, getAllSongs } from "../api";
+import { actionType } from "../context/reducer";
+import { useStateValue } from '../context/StateProvider';
 
 const SongCard = ({ data, index }: any, type: string) => {
 const [isDelete, setIsDelete] = useState(false)
+const [{allSongs}, dispatch]:any = useStateValue()
 
-const handleDeleteAlbum = () => {
+const handleDeleteAlbum = (data: any) => {
 if(type === "songs"){
-
-}
-}
+  deleteSong(data._id).then((res) => {
+      if (res?.data) {
+          dispatch({
+            type: actionType.SET_ALL_USERS,
+            allAlertMassages: "success",
+          });
+        };
+      }
+    )};
+  };
   return (
     <motion.div className="relative w-50 min-w-210 px-2 py-3 cursor-pointer hover:bg-card items-center flex flex-col shadow-md hover:bg-gray-100 rounded-lg">
         <div className="w-40 min-w-[160px] h-40 min-h-[160px] rounded-lg drop-shadow-lg relative overflow-hidden">
@@ -46,6 +57,5 @@ if(type === "songs"){
 };
 
 export default SongCard;
-
 
 

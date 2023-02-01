@@ -12,7 +12,7 @@ const DashboardAlbums = () => {
       getAllAlbums().then((data) => {
         
         dispatch({
-          type: actionType.SET_ALL_ALBUMS,
+          type: actionType.SET_ALL_ALERTMESSAGES,
           allAlbums: data.album,
         });
       });

@@ -108,3 +108,12 @@ export const removeUser = async(userId: string)=> {
         
     }
   }
+
+  export const deleteSong = async(userId: string)=>{
+    try {
+        const res = await axios.delete(`${baseURL}api/song/delete/${userId}`)
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+  }
