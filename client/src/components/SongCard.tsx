@@ -8,52 +8,55 @@ import { storage } from "../config/firebase.config";
 import { actionType } from "../context/reducer";
 import { useStateValue } from '../context/StateProvider';
 
-const SongCard = ({ data, index }: any, type: any) => {
+const SongCard = ({ data, index, type}: any) => {
 const [isDelete, setIsDelete] = useState(false)
 const [{ allSongs,  }, dispatch]:any = useStateValue()
 
 const handleDeleteAlbum = (data: any) => {
-  console.log(type);
   
-  //Songs delete function
-// if(type === "songs"){
-//   const deleteRef = ref(storage, data.imageURL)
-//   deleteObject(deleteRef).then(()=>{})
-//   deleteSong(data._id).then((res) => {
-//       if (res?.data) {
-//           dispatch({
-//             type: actionType.SET_ALL_USERS,
-//             allAlertMassages: "success",
-//           });
-//           setInterval(()=>{
-//             dispatch({
-//               type: actionType.SET_ALL_USERS,
-//               allAlertMassages: "",
-//             });
-//           }, 3000)
-//           getAllSongs().then((data)=>{
-//             dispatch({
-//               type: actionType.SET_ALL_SONGS,
-//               allSongs: data.songs
-//             })
-//           })
-//         } else {
-//           dispatch({
-//             type: actionType.SET_ALL_USERS,
-//             allAlertMassages: "danger",
-//           });
-//           setInterval(()=>{
-//             dispatch({
-//               type: actionType.SET_ALL_USERS,
-//               allAlertMassages: "",
-//             });
-//           }, 3000)
-//         }
-//       },
-//     )};
+  // Songs delete function
+  if(type === "song"){
+      const deleteRef = ref(storage, data.imageURL)
+  deleteObject(deleteRef).then(()=>{})
+  deleteSong(data._id).then((res) => {
+      if (res?.data) {
+          dispatch({
+            type: actionType.SET_ALL_USERS,
+            allAlertMassages: "success",
+          });
+          setInterval(()=>{
+            dispatch({
+              type: actionType.SET_ALL_USERS,
+              allAlertMassages: null
+            });
+          }, 3000)
+          getAllSongs().then((data)=>{
+            dispatch({
+              type: actionType.SET_ALL_SONGS,
+              allSongs: data.songs
+            })
+          })
+        } else {
+          dispatch({
+            type: actionType.SET_ALL_USERS,
+            allAlertMassages: "danger",
+          });
+          setInterval(()=>{
+            dispatch({
+              type: actionType.SET_ALL_USERS,
+              allAlertMassages: null
+            });
+          }, 3000)
+        }
+      },
+    )};
 // Album delete function
     if(type === "album"){
       const deleteRef = ref(storage, data.imageURL)
+      console.log(deleteRef);
+  console.log(data.imageURL);
+
+      
       deleteObject(deleteRef).then(()=>{})
       deleteAlbumById(data._id).then((res) => {
           if (res?.data) {
@@ -64,7 +67,7 @@ const handleDeleteAlbum = (data: any) => {
               setInterval(()=>{
                 dispatch({
                   type: actionType.SET_ALL_ALBUMS,
-                  allAlertMassages: "",
+                  allAlertMassages: null,
                 });
               }, 3000)
               getAllAlbums().then((data)=>{
@@ -81,7 +84,7 @@ const handleDeleteAlbum = (data: any) => {
               setInterval(()=>{
                 dispatch({
                   type: actionType.SET_ALL_ALERTMESSAGES,
-                  allAlertMassages: "",
+                  allAlertMassages: null
                 });
               }, 3000)
             }
@@ -89,41 +92,41 @@ const handleDeleteAlbum = (data: any) => {
         )};
 // Artist delete function
 
-// if(type === "artist"){
-//   const deleteRef = ref(storage, data.imageURL)
-//   deleteObject(deleteRef).then(()=>{})
-//   deleteArtistById(data._id).then((res) => {
-//       if (res?.data) {
-//           dispatch({
-//             type: actionType.SET_ALL_USERS,
-//             allAlertMassages: "success",
-//           });
-//           setInterval(()=>{
-//             dispatch({
-//               type: actionType.SET_ALL_USERS,
-//               allAlertMassages: "",
-//             });
-//           }, 3000)
-//           getAllArtists().then((data)=>{
-//             dispatch({
-//               type: actionType.SET_ALL_ARTISTS,
-//               allArtists: data.artist
-//             })
-//           })
-//         } else {
-//           dispatch({
-//             type: actionType.SET_ALL_ALERTMESSAGES,
-//             allAlertMassages: "danger",
-//           });
-//           setInterval(()=>{
-//             dispatch({
-//               type: actionType.SET_ALL_ALERTMESSAGES,
-//               allAlertMassages: "",
-//             });
-//           }, 3000)
-//         }
-//       },
-//     )};
+if(type === "artist"){
+  const deleteRef = ref(storage, data.imageURL)
+  deleteObject(deleteRef).then(()=>{})
+  deleteArtistById(data._id).then((res) => {
+      if (res?.data) {
+          dispatch({
+            type: actionType.SET_ALL_USERS,
+            allAlertMassages: "success",
+          });
+          setInterval(()=>{
+            dispatch({
+              type: actionType.SET_ALL_USERS,
+              allAlertMassages: null
+            });
+          }, 3000)
+          getAllArtists().then((data)=>{
+            dispatch({
+              type: actionType.SET_ALL_ARTISTS,
+              allArtists: data.artist
+            })
+          })
+        } else {
+          dispatch({
+            type: actionType.SET_ALL_ALERTMESSAGES,
+            allAlertMassages: "danger",
+          });
+          setInterval(()=>{
+            dispatch({
+              type: actionType.SET_ALL_ALERTMESSAGES,
+              allAlertMassages: null
+            });
+          }, 3000)
+        }
+      },
+    )};
 
   };
   return (

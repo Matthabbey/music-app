@@ -452,7 +452,7 @@ const DashboardNewSong = () => {
       {/* Input Album name */}
       <input
         type="text"
-        placeholder="Artist name"
+        placeholder="Album Title"
         className="w-full p-3 rounded-md text-base font-semibold text-textColor outline-none shadow-sm border border-gray-300 bg-transparent"
         value={albumName}
         onChange={(e) => setAlbumName(e.target.value)}
