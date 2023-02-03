@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { changingUserRole, getAllUSers, removeUser } from "../api";
 import { useStateValue } from "../context/StateProvider";
 import { motion } from "framer-motion";
@@ -9,10 +9,21 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const DashboardUserCard = ({ data, index }: any) => {
-  const [{ user }, dispatch]: any | {} = useStateValue();
+  const [{ user, allUsers }, dispatch]: any | {} = useStateValue();
   const [updateRole, setUpdateRole] = useState<boolean>(false);
   const createdAt = moment(new Date(data.createdAt)).format("MMMM Do YYYY");
   const notify = () => toast("Wow so easy!");
+
+  useEffect(()=>{
+    if(!allUsers){
+      getAllUSers().then((data)=>{
+        dispatch({
+          type: actionType.SET_ALL_USERS,
+          allUsers: data.data
+        })
+      })
+    }
+  }, [])
 
   const handleUpdateUserRole = (userId: string, role: string) => {
     notify();

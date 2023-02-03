@@ -82,12 +82,21 @@ export const UpdateSong = async (req: Request, res: Response) => {
 export const DeleteSong = async (req: Request, res: Response) => {
   const filter = { _id: req.params.id };
 
-  const remove = await songsModel.deleteOne(filter);
-
-  if (remove) {
-    return res
-      .status(200)
-      .json({ message: "Data has been deleted Successfully", data: remove });
+  // const remove = await .deleteOne(filter);
+  const deleteMe = await songsModel.findByIdAndDelete(req.params.id);
+  if (!deleteMe) {
+    return res.status(404).json({
+      message: "This item has been deleted",
+    });
   }
-  return res.status(404).json({ message: "Data is Not Found" });
+  return res.status(200).json({
+    message: "You have successfully deleted your TODO item",
+  });
+
+  // if (remove) {
+  //   return res
+  //     .status(200)
+  //     .json({ message: "Data has been deleted Successfully", data: remove });
+  // }
+  // return res.status(404).json({ message: "Data is Not Found" });
 };
