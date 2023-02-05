@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import React from 'react'
 import { BsEmojiWink, BsEmojiFrown} from 'react-icons/bs'
 
-const AlertMessages: React.FC<any> = ({type}) => {
+const AlertMessages= ({type}: any) => {
   return (
     <motion.div 
     initial = {{translateX : 200, opacity: 0}}
