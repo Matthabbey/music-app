@@ -9,7 +9,11 @@ export const actionType = {
     SET_ALL_ARTISTFILTER: "SET_ALL_ARTISTFILTER",
     SET_ALL_LANGUAGEFILTER: "SET_ALL_LANGUAGEFILTER",
     SET_ALL_ALBUMFILTER: "SET_ALL_ALBUMFILTER",
-    SET_ALL_ALERTMESSAGES: "SET_ALL_ALERTMESSAGES"
+    SET_ALL_ALERTMESSAGES: "SET_ALL_ALERTMESSAGES",
+
+    //SETTING SONG
+    SET_ISSONG_PLAYING: "SET_ISSONG_PLAYING",
+    SET_SONG_INDEX: "SET_SONG_INDEX" 
 }
 
 const reducer = (state: any, action: any)=>{
@@ -70,6 +74,18 @@ const reducer = (state: any, action: any)=>{
                 ...state,
                 allAlertMassages: action.allAlertMassages
             }
+        case actionType.SET_ISSONG_PLAYING:
+            return {
+                ...state,
+                 isSongPlaying: action.isSongPlaying
+            }
+        case actionType.SET_SONG_INDEX:
+            return {
+                ...state,
+                songIndex: action.songIndex
+            }
+
+
 
         default: return state
     }
