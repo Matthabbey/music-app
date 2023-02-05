@@ -8,6 +8,8 @@ export const initialState = {
     artistFilter: null,
     languageFilter: null,
     albumFilter: null,
-    allAlertMassages: null
+    allAlertMassages: null,
+    isSongPlaying: false,
+    songIndex: 0
     
 }
