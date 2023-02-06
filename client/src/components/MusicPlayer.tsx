@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useStateValue } from '../context/StateProvider';
 import { RiPlayListFill, RiUserStarFill } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import { getAllSongs } from '../api';
+import { actionType } from '../context/reducer';
+import { duration } from 'moment';
 
 const MusicPlayer = () => {
   const [{ allSongs, isSongPlaying, songIndex, allAlertMassages}, dispatch]: String | any= useStateValue();
@@ -38,9 +41,56 @@ const MusicPlayer = () => {
                 showSkipControls={true}
                 />
             </div>
+
+            {
+                isSongPlaying && (
+                    <PlayListCard />
+                )
+            }
         </div>
     </div>
   )
 }
+export const PlayListCard = () =>{
+    const [{ allSongs, isSongPlaying, songIndex, allAlertMassages}, dispatch]: String | any= useStateValue();
 
+    useEffect(()=> {
+        if(!allSongs){
+            getAllSongs().then((data)=>{
+                dispatch({
+                    type: actionType.SET_ALL_SONGS,
+                    allSongs: data.data
+                })
+            })
+        }
+    }, [])
+
+    const setCurrentSongIndex = ()=>{
+        if(!isSongPlaying){
+            dispatch({
+                type: actionType.SET_ISSONG_PLAYING,
+                isSongPlaying: true
+            })
+        }
+        if(song !== songIndex){
+
+        }
+    }
+
+    return (
+        <div className='absolute left-4 bottom-24 gap-2 py-2 w-350 max-w-[350px] h-510 max-h-[510px] flex flex-col overflow-y-scroll scrollbar-thin rounded-md bg-primary shadow-md'>
+            {
+                allSongs.length > 0 ? (
+                    allSongs.map((song: string, index: number)=>(
+                        <motion.div initial={{opacity: 0, translateX: -50}} animate={{opacity: 1, translateX: 0}} transition={{duration: 0.3, delay: index * 0.1}} className='group w-full p-4 hover:bg-card flex gap-3 items-center cursor-pointer bg-transparent'>
+
+                        </motion.div>
+                    ) )
+                ):<></>
+            }
+
+        </div>
+    )
+
+}
 export default MusicPlayer
