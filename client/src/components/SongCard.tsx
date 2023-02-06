@@ -17,7 +17,7 @@ import { useStateValue } from "../context/StateProvider";
 
 const SongCard = ({ data, index, type }: any) => {
   const [isDelete, setIsDelete] = useState(false);
-  const [{ allSongs, isSongPlaying, songIndex, allAlertMassages}, dispatch]: any = useStateValue();
+  const [{ allSongs, isSongPlaying, songIndex, allAlertMassages}, dispatch]: String | any= useStateValue();
 
 
 
@@ -136,25 +136,26 @@ const SongCard = ({ data, index, type }: any) => {
     }
   };
 
-  const handleAddContent = () => {
+  const handleAddContent = (e: any) => {
+    e.preventDefault()
     console.log(type);
     if(!isSongPlaying){
       dispatch({
         type: actionType.SET_ISSONG_PLAYING,
-        isSongPlaying: data.isSongPlaying
+        isSongPlaying: true
       })
     }
     if(songIndex !== index){
         dispatch({
           type: actionType.SET_SONG_INDEX,
-          songIndex: data.songIndex
+          songIndex: index
         })
     }
   }; 
   return (
     <motion.div
       className="relative w-50 min-w-210 px-2 py-3 cursor-pointer hover:bg-card items-center flex flex-col shadow-md hover:bg-gray-100 rounded-lg"
-      onClick={type === "song" && handleAddContent} 
+      onClick={type === 'song' && handleAddContent} 
     >
       <div className="w-40 min-w-[160px] h-40 min-h-[160px] rounded-lg drop-shadow-lg relative overflow-hidden">
         <motion.img
