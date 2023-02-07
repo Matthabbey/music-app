@@ -14,7 +14,7 @@ const MusicPlayer = () => {
   const [isPlayList, setIsPlayList] = useState(false)
 
   const handleNextTrack = ()=>{
-    if(songIndex > allSongs){
+    if(songIndex > allSongs.length){
         dispatch({
           type: actionType.SET_SONG_INDEX,
           songIndex: 0
@@ -28,7 +28,17 @@ const MusicPlayer = () => {
   }
 
   const handlePreviousTrack = ()=>{
-
+    if(songIndex === 0){
+        dispatch({
+          type: actionType.SET_SONG_INDEX,
+          songIndex: songIndex
+        })
+    }else {
+        dispatch({
+            type: actionType.SET_SONG_INDEX,
+            songIndex: songIndex - 1
+          })
+    }
   }
 
   return (
