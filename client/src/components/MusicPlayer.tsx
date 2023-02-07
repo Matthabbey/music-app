@@ -27,10 +27,10 @@ const MusicPlayer = () => {
                 </p>
                 <motion.i 
                 whileTap={{opacity: 0.58}}
-                onClick={()=> setIsPlayList(!isPlayList)}
+                // onClick={()=> setIsPlayList(!isPlayList)}
                 
                 >
-                    <i className='text-textColor hover:text-headingColor'>
+                    <i className='text-textColor hover:text-headingColor text-2xl cursor-pointer' onClick={()=>setIsPlayList(!isPlayList)}>
                         <RiPlayListFill />
                         </i>
                 </motion.i>
@@ -68,19 +68,19 @@ export const PlayListCard = () =>{
         }
     }, [])
 
-    const setCurrentSongIndex = (si: any)=>{
+    const setCurrentSongIndex = (index: any)=>{
         if(!isSongPlaying){
             dispatch({
-                type: actionType.SET_ISSONG_PLAYING,
-                isSongPlaying: true
+              type: actionType.SET_ISSONG_PLAYING,
+              isSongPlaying: true
             })
-        }
-        if(songIndex !== si){
-            dispatch({
-                type: actionType.SET_SONG,
-                song: si
-            })
-        }
+          }
+          if(songIndex !== index){
+              dispatch({
+                type: actionType.SET_SONG_INDEX,
+                songIndex: index
+              })
+          }
     }
 
     return (

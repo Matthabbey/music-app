@@ -138,7 +138,7 @@ const SongCard = ({ data, index, type }: any) => {
 
   const handleAddContent = (e: any) => {
     e.preventDefault()
-    console.log(type);
+    // console.log(type);
     if(!isSongPlaying){
       dispatch({
         type: actionType.SET_ISSONG_PLAYING,
