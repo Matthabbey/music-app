@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStateValue } from '../context/StateProvider';
 import { RiPlayListFill, RiUserStarFill } from 'react-icons/ri';
 import { motion } from 'framer-motion';
@@ -11,6 +11,7 @@ import { IoMusicalNote } from 'react-icons/io5';
 
 const MusicPlayer = () => {
   const [{ allSongs, isSongPlaying, songIndex, allAlertMassages}, dispatch]: String | any= useStateValue();
+  const [isPlayList, setIsPlayList] = useState(false)
 
   return (
     <div className='w-full items-center flex gap-3'>
@@ -26,6 +27,7 @@ const MusicPlayer = () => {
                 </p>
                 <motion.i 
                 whileTap={{opacity: 0.58}}
+                onClick={()=> setIsPlayList(!isPlayList)}
                 
                 >
                     <i className='text-textColor hover:text-headingColor'>
