@@ -13,6 +13,24 @@ const MusicPlayer = () => {
   const [{ allSongs, isSongPlaying, songIndex, allAlertMassages}, dispatch]: String | any= useStateValue();
   const [isPlayList, setIsPlayList] = useState(false)
 
+  const handleNextTrack = ()=>{
+    if(songIndex > allSongs){
+        dispatch({
+          type: actionType.SET_SONG_INDEX,
+          songIndex: 0
+        })
+    }else {
+        dispatch({
+            type: actionType.SET_SONG_INDEX,
+            songIndex: songIndex + 1
+          })
+    }
+  }
+
+  const handlePreviousTrack = ()=>{
+
+  }
+
   return (
     <div className='w-full items-center flex gap-3'>
         <div className='w-full items-center flex gap-1 p-4 relative'>
@@ -42,6 +60,8 @@ const MusicPlayer = () => {
                 onPlay={()=>console.log('is playing')}
                 autoPlay={true}
                 showSkipControls={true}
+                onClickNext={handleNextTrack}
+                onClickPrevious={handlePreviousTrack}
                 />
             </div>
 
@@ -82,6 +102,8 @@ export const PlayListCard = () =>{
               })
           }
     }
+
+    
 
     return (
         <div className='absolute left-4 bottom-24 gap-2 py-2 w-350 max-w-[350px] h-510 max-h-[510px] flex flex-col overflow-y-scroll scrollbar-thin rounded-md bg-primary shadow-md'>
