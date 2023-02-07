@@ -7,14 +7,14 @@ import 'react-h5-audio-player/lib/styles.css';
 import { getAllSongs } from '../api';
 import { actionType } from '../context/reducer';
 import { duration } from 'moment';
-import { IoMusicalNote } from 'react-icons/io5';
+import { IoClose, IoMusicalNote } from 'react-icons/io5';
 
 const MusicPlayer = () => {
   const [{ allSongs, isSongPlaying, songIndex, allAlertMassages}, dispatch]: String | any= useStateValue();
   const [isPlayList, setIsPlayList] = useState(false)
 
   const handleNextTrack = ()=>{
-    if(songIndex > allSongs.length){
+    if(songIndex > allSongs.length - 1){
         dispatch({
           type: actionType.SET_SONG_INDEX,
           songIndex: 0
@@ -39,6 +39,12 @@ const MusicPlayer = () => {
             songIndex: songIndex - 1
           })
     }
+  }
+  const handleClosePlayer = ()=>{
+    dispatch({
+        type: actionType.SET_ISSONG_PLAYING,
+        isSongPlaying: false
+      })
   }
 
   return (
@@ -80,6 +86,7 @@ const MusicPlayer = () => {
                     <PlayListCard />
                 )
             }
+            <IoClose onClick={handleClosePlayer}/>
         </div>
     </div>
   )
