@@ -8,6 +8,7 @@ import { getAllSongs } from '../api';
 import { actionType } from '../context/reducer';
 import { duration } from 'moment';
 import { IoClose, IoMusicalNote } from 'react-icons/io5';
+import { trusted } from 'mongoose';
 
 const MusicPlayer = () => {
   const [{ allSongs, isSongPlaying, songIndex, allAlertMassages}, dispatch]: String | any= useStateValue();
@@ -61,10 +62,9 @@ const MusicPlayer = () => {
                 </p>
                 <motion.i 
                 whileTap={{opacity: 0.58}}
-                // onClick={()=> setIsPlayList(!isPlayList)}
-                
+                // onClick={()=> setIsPlayList(!isPlayList)}        
                 >
-                    <i className='text-textColor hover:text-headingColor text-2xl cursor-pointer' onClick={()=>setIsPlayList(!isPlayList)}>
+                    <i className='text-textColor hover:text-headingColor text-2xl cursor-pointer' onClick={()=>console.log(setIsPlayList(true))}>
                         <RiPlayListFill />
                         </i>
                 </motion.i>
